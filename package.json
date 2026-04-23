@@ -1,0 +1,15 @@
+{
+  "name": "btc-onchain-dashboard",
+  "version": "1.0.0",
+  "description": "Standalone BTC on-chain signal dashboard — 5 Tier-S signals, dual confluence (cycle top / accumulation), composite 0-100.",
+  "main": "entry.jsx",
+  "scripts": {
+    "build": "npx esbuild entry.jsx --bundle --outfile=bundle.js --jsx=automatic --format=iife --target=es2020 --minify"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "recharts": "^3.7.0"
+  }
+}
