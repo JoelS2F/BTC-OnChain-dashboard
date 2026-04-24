@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import {
   LineChart, Line, AreaChart, Area, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  ReferenceLine, Legend, Cell
+  ReferenceLine, ReferenceArea, Legend, Cell
 } from "recharts";
 
 // ─── COLORS (Ethena BD Assessment palette) ──────────────────────────────────
@@ -118,9 +118,19 @@ function CompositeGauge({ score, regime }) {
 }
 
 // ─── SIGNAL TILE ────────────────────────────────────────────────────────────
-function SignalTile({ signal }) {
+function SignalTile({ signal, lastFired }) {
   const c = directionColor(signal.direction);
   const fired = signal.fired;
+  const lf = lastFired?.[signal.id];
+  const lastFiredLabel = (() => {
+    if (!lf || lf.days_ago == null) return null;
+    if (lf.days_ago === 0) return "today";
+    if (lf.days_ago === 1) return "1d ago";
+    if (lf.days_ago < 30) return `${lf.days_ago}d ago`;
+    if (lf.days_ago < 365) return `${Math.round(lf.days_ago / 30)}mo ago`;
+    const yrs = (lf.days_ago / 365).toFixed(1);
+    return `${yrs}y ago`;
+  })();
   return (
     <Card style={{ padding: 16 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
@@ -129,6 +139,15 @@ function SignalTile({ signal }) {
           {fired ? "FIRED" : "IDLE"}
         </Pill>
       </div>
+      {lastFiredLabel && !fired && (
+        <div style={{
+          fontSize: 10, color: C.text3, fontFamily: "JetBrains Mono, monospace",
+          marginBottom: 8, letterSpacing: 0.3,
+        }}>
+          Last fired: <span style={{ color: C.text2 }}>{lastFiredLabel}</span>
+          {lf.last_date && <span style={{ color: C.text3, marginLeft: 6 }}>({lf.last_date})</span>}
+        </div>
+      )}
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
         <div style={{ flex: 1, height: 6, background: C.borderSubtle, borderRadius: 3, overflow: "hidden" }}>
           <div style={{
@@ -237,11 +256,41 @@ function HistoryChart({ history }) {
         <div style={{ fontSize: 14, fontWeight: 700, color: C.text }}>Composite vs BTC Price — 365d Walk-Back</div>
         <div style={{ fontSize: 11, color: C.text3 }}>5-day sampled</div>
       </div>
-      <div style={{ fontSize: 11, color: C.text3, marginBottom: 14, lineHeight: 1.5 }}>
-        Replays today's signal pipeline against each historical cutoff. Shaded bands mark distribute (≥65) and accumulate (≤45) regimes.
+      <div style={{ fontSize: 11, color: C.text3, marginBottom: 10, lineHeight: 1.5 }}>
+        Replays today's signal pipeline against each historical cutoff. Colored zones = regime bands validated in backtest.
+      </div>
+      {/* Regime legend */}
+      <div style={{ display: "flex", gap: 14, marginBottom: 10, flexWrap: "wrap", fontSize: 10 }}>
+        {[
+          { label: "MAX_ACCUMULATE", color: C.green, range: "0-25", edge: "+29% 90d" },
+          { label: "ACCUMULATE",     color: C.green, range: "25-45", edge: "+25% 90d" },
+          { label: "NEUTRAL",        color: C.text2, range: "45-65", edge: "+64% (skew)" },
+          { label: "REDUCE",         color: C.red,   range: "65-80", edge: "-15% 90d" },
+          { label: "DISTRIBUTE",     color: C.red,   range: "80+", edge: "n too small" },
+        ].map(r => (
+          <div key={r.label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ width: 10, height: 10, background: r.color, opacity: 0.4, borderRadius: 2 }} />
+            <span style={{ color: C.text2, fontFamily: "JetBrains Mono, monospace" }}>{r.label}</span>
+            <span style={{ color: C.text3 }}>({r.range}) · {r.edge}</span>
+          </div>
+        ))}
       </div>
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
+          <defs>
+            <linearGradient id="regimeGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={C.red} stopOpacity={0.10} />
+              <stop offset="20%" stopColor={C.red} stopOpacity={0.10} />
+              <stop offset="20%" stopColor={C.amber} stopOpacity={0.06} />
+              <stop offset="35%" stopColor={C.amber} stopOpacity={0.06} />
+              <stop offset="35%" stopColor={C.text3} stopOpacity={0.03} />
+              <stop offset="55%" stopColor={C.text3} stopOpacity={0.03} />
+              <stop offset="55%" stopColor={C.green} stopOpacity={0.06} />
+              <stop offset="75%" stopColor={C.green} stopOpacity={0.06} />
+              <stop offset="75%" stopColor={C.green} stopOpacity={0.12} />
+              <stop offset="100%" stopColor={C.green} stopOpacity={0.12} />
+            </linearGradient>
+          </defs>
           <CartesianGrid strokeDasharray="3 3" stroke={C.borderSubtle} />
           <XAxis dataKey="date" tick={{ fontSize: 11, fill: C.text3 }} interval="preserveStartEnd" />
           <YAxis yAxisId="left" domain={[0, 100]} tick={{ fontSize: 11, fill: C.text3 }} />
@@ -254,6 +303,11 @@ function HistoryChart({ history }) {
             }}
           />
           <Legend wrapperStyle={{ fontSize: 11 }} />
+          {/* Reference zones as horizontal bands */}
+          <ReferenceArea yAxisId="left" y1={0}  y2={25}  fill={C.green} fillOpacity={0.12} />
+          <ReferenceArea yAxisId="left" y1={25} y2={45}  fill={C.green} fillOpacity={0.06} />
+          <ReferenceArea yAxisId="left" y1={65} y2={80}  fill={C.amber} fillOpacity={0.10} />
+          <ReferenceArea yAxisId="left" y1={80} y2={100} fill={C.red}   fillOpacity={0.12} />
           <ReferenceLine yAxisId="left" y={65} stroke={C.red} strokeDasharray="4 4" strokeOpacity={0.5} />
           <ReferenceLine yAxisId="left" y={45} stroke={C.green} strokeDasharray="4 4" strokeOpacity={0.5} />
           <Line yAxisId="right" type="monotone" dataKey="price" stroke={C.text3} strokeWidth={1.5} dot={false} name="BTC Price" />
@@ -594,6 +648,26 @@ function CompositePriceScatter({ timeline }) {
   );
 }
 
+function downloadCsv(filename, rows, headers) {
+  const header = headers.join(",");
+  const body = rows.map(r =>
+    headers.map(h => {
+      const v = r[h];
+      if (v === null || v === undefined) return "";
+      if (typeof v === "object") return JSON.stringify(v).replace(/,/g, ";");
+      return String(v);
+    }).join(",")
+  ).join("\n");
+  const csv = `${header}\n${body}`;
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 function ValidationView({ bt }) {
   if (!bt) {
     return (
@@ -607,6 +681,35 @@ function ValidationView({ bt }) {
   }
   const generated = new Date(bt.generated_at);
   const dateRange = bt.summary?.date_range;
+
+  const exportTimelineCsv = () => {
+    const headers = ["date", "price", "composite", "regime", "cycle_count", "acc_count",
+                     "fwd_30d", "fwd_90d", "fwd_180d", "mdd_30d", "mdd_90d", "mdd_180d",
+                     "mru_30d", "mru_90d", "mru_180d", "signals_fired"];
+    downloadCsv(`btc_onchain_backtest_timeline_${bt.generated_at?.slice(0, 10)}.csv`, bt.timeline, headers);
+  };
+
+  const exportBucketsCsv = () => {
+    const rows = Object.entries(bt.composite_buckets_stats).flatMap(([regime, b]) =>
+      bt.fwd_windows.map(w => ({
+        regime,
+        range_lo: b.range?.[0],
+        range_hi: b.range?.[1],
+        n: b[`fwd_${w}d`]?.n,
+        window_days: w,
+        mean: b[`fwd_${w}d`]?.mean,
+        median: b[`fwd_${w}d`]?.median,
+        p25: b[`fwd_${w}d`]?.p25,
+        p75: b[`fwd_${w}d`]?.p75,
+        win_rate: b[`fwd_${w}d`]?.win_rate,
+        mdd_mean: b[`mdd_${w}d_mean`],
+        mru_mean: b[`mru_${w}d_mean`],
+      }))
+    );
+    downloadCsv(`btc_onchain_bucket_stats_${bt.generated_at?.slice(0, 10)}.csv`,
+      rows, Object.keys(rows[0] || { empty: 0 }));
+  };
+
   return (
     <>
       <Card style={{ marginBottom: 20 }}>
@@ -624,6 +727,18 @@ function ValidationView({ bt }) {
               ? `${bt.summary.overall_fwd_returns.fwd_90d.mean > 0 ? "+" : ""}${bt.summary.overall_fwd_returns.fwd_90d.mean}%`
               : "—"}
           </span>
+        </div>
+        <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
+          <button onClick={exportTimelineCsv} style={{
+            padding: "6px 12px", background: C.accent, color: "#fff", border: "none",
+            borderRadius: 6, fontSize: 11, fontWeight: 600, cursor: "pointer",
+            fontFamily: "Inter, sans-serif", letterSpacing: 0.3,
+          }}>↓ Export Timeline CSV</button>
+          <button onClick={exportBucketsCsv} style={{
+            padding: "6px 12px", background: "transparent", color: C.accent,
+            border: `1px solid ${C.accent}`, borderRadius: 6, fontSize: 11, fontWeight: 600,
+            cursor: "pointer", fontFamily: "Inter, sans-serif", letterSpacing: 0.3,
+          }}>↓ Export Bucket Stats CSV</button>
         </div>
       </Card>
 
@@ -823,7 +938,7 @@ export default function BtcOnChainDashboard() {
             gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: 12,
           }}>
-            {state.signals.map(sig => <SignalTile key={sig.id} signal={sig} />)}
+            {state.signals.map(sig => <SignalTile key={sig.id} signal={sig} lastFired={state.signal_last_fired} />)}
           </div>
         </div>
 
