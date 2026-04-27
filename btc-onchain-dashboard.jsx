@@ -238,6 +238,440 @@ function ConfluenceBar({ title, rules, count, accent, hintHigh }) {
   );
 }
 
+// ─── SUPPLY TOPOGRAPHY (URPD blend: ATH + Entity-Adjusted + Percent-Partitioned) ──
+function TopoKpiTile({ label, value, sub, color }) {
+  return (
+    <div style={{
+      flex: 1, minWidth: 140, padding: 14,
+      background: C.surface, border: `1px solid ${C.borderSubtle}`,
+      borderRadius: 10,
+    }}>
+      <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 6 }}>
+        {label}
+      </div>
+      <div style={{
+        fontFamily: "JetBrains Mono, monospace", fontSize: 22, fontWeight: 700,
+        color: color || C.text, lineHeight: 1.1,
+      }}>{value}</div>
+      {sub && <div style={{ fontSize: 11, color: C.text3, marginTop: 4 }}>{sub}</div>}
+    </div>
+  );
+}
+
+function TopoSignalChip({ sig }) {
+  const fired = sig.fired;
+  // Edge sign determines bullish/bearish coloring of the chip
+  const edge = sig.validated_edge_90d;
+  const directional = edge != null ? (edge > 0 ? C.green : C.red) : C.text3;
+  const c = fired ? directional : C.text3;
+  const labels = {
+    conviction_overhang: "Conviction Overhang",
+    accumulation_cluster_forming: "Accumulation Forming",
+    cycle_top_pattern_match: "Cycle-Top Pattern",
+  };
+  return (
+    <div style={{
+      flex: 1, minWidth: 220, padding: 10,
+      background: fired ? `${c}10` : "transparent",
+      border: `1px solid ${fired ? c : C.borderSubtle}`, borderRadius: 8,
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: C.text }}>{labels[sig.id] || sig.id}</div>
+        <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+          {edge != null && (
+            <span style={{
+              fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 600,
+              color: directional, padding: "2px 6px", borderRadius: 4,
+              background: `${directional}10`,
+            }}>
+              {edge > 0 ? "+" : ""}{edge}pp 90d
+            </span>
+          )}
+          <Pill color={fired ? "#fff" : C.text3} bg={fired ? c : C.borderSubtle}>
+            {fired ? "FIRED" : "IDLE"}
+          </Pill>
+        </div>
+      </div>
+      <div style={{ fontSize: 10, color: C.text2, lineHeight: 1.4, fontFamily: "JetBrains Mono, monospace" }}>
+        {sig.rationale}
+      </div>
+    </div>
+  );
+}
+
+function LiveHistogramView({ topo }) {
+  const cur = topo.current_price;
+  const ath = topo.live.ath_partitioned.histogram || [];
+  const ea = topo.live.entity_adjusted.histogram || [];
+
+  // Both are 100-bucket ATH-banded with same price grid — overlay them by index.
+  // Trim to current_price ±60% for readable resolution.
+  const data = useMemo(() => {
+    const lo = cur * 0.4, hi = cur * 1.6;
+    const merged = [];
+    const n = Math.min(ath.length, ea.length);
+    for (let i = 0; i < n; i++) {
+      const p = ath[i].price;
+      if (p < lo || p > hi) continue;
+      merged.push({
+        price: p,
+        priceLabel: `$${(p / 1000).toFixed(1)}k`,
+        share_raw: ath[i].share || 0,
+        share_ea: ea[i].share || 0,
+        divergence: Math.abs((ath[i].share || 0) - (ea[i].share || 0)),
+      });
+    }
+    return merged.reverse(); // higher prices on top of horizontal histogram
+  }, [ath, ea, cur]);
+
+  const feat = topo.live.entity_adjusted.features;
+  const eaMeta = topo.live.entity_adjusted.metadata;
+
+  return (
+    <div>
+      <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16 }}>
+        <div>
+          <div style={{ fontSize: 12, color: C.text3, marginBottom: 8, lineHeight: 1.5 }}>
+            Cost-basis distribution. Sky = raw URPD. Purple = entity-adjusted (true holder cost basis, exchange churn removed).
+            Where they agree = high-conviction zone. Trimmed to ±60% of current price.
+          </div>
+          <ResponsiveContainer width="100%" height={520}>
+            <BarChart layout="vertical" data={data} margin={{ top: 5, right: 20, left: 6, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="2 2" stroke={C.borderSubtle} horizontal={false} />
+              <XAxis type="number" tick={{ fontSize: 10, fill: C.text3 }}
+                tickFormatter={(v) => `${(v * 100).toFixed(1)}%`} />
+              <YAxis type="category" dataKey="priceLabel" tick={{ fontSize: 10, fill: C.text3, fontFamily: "JetBrains Mono, monospace" }}
+                interval={4} width={60} />
+              <Tooltip
+                contentStyle={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 8, fontSize: 11 }}
+                formatter={(v, name) => [`${(v * 100).toFixed(2)}% of supply`, name]}
+                labelFormatter={(label) => `Cost basis: ${label}`}
+              />
+              <Legend wrapperStyle={{ fontSize: 11 }} />
+              <Bar dataKey="share_raw" name="Raw URPD" fill={C.accent} fillOpacity={0.55} />
+              <Bar dataKey="share_ea"  name="Entity-Adjusted" fill={C.purple} fillOpacity={0.65} />
+              <ReferenceLine y={`$${(cur / 1000).toFixed(1)}k`} stroke={C.text} strokeDasharray="4 4" strokeWidth={1.5}
+                label={{ value: `Current $${(cur / 1000).toFixed(1)}k`, position: "right", fill: C.text, fontSize: 10 }} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <div style={{
+            padding: 12, background: C.surface, border: `1px solid ${C.borderSubtle}`,
+            borderRadius: 10, fontSize: 11, lineHeight: 1.6,
+          }}>
+            <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1, textTransform: "uppercase", marginBottom: 8 }}>
+              Conviction Layer
+            </div>
+            <div style={{ color: C.text2 }}>
+              Raw supply: <b style={{ color: C.text, fontFamily: "JetBrains Mono, monospace" }}>
+                {fmt.big(topo.live.ath_partitioned.metadata.total_supply)} BTC</b>
+            </div>
+            <div style={{ color: C.text2 }}>
+              EA supply: <b style={{ color: C.text, fontFamily: "JetBrains Mono, monospace" }}>
+                {fmt.big(eaMeta.total_supply)} BTC</b>
+            </div>
+            <div style={{ color: C.text2, marginTop: 4 }}>
+              Entity churn gap: <b style={{ color: C.purple, fontFamily: "JetBrains Mono, monospace" }}>
+                {fmt.big(eaMeta.entity_filter_gap_btc)} BTC</b>
+            </div>
+            <div style={{ color: C.text2, marginTop: 4 }}>
+              Raw vs EA divergence: <b style={{ color: C.text, fontFamily: "JetBrains Mono, monospace" }}>
+                {topo.live.raw_vs_ea_divergence_pct.toFixed(1)}%</b>
+            </div>
+          </div>
+          <div style={{
+            padding: 12, background: C.surface, border: `1px solid ${C.borderSubtle}`,
+            borderRadius: 10, fontSize: 11, lineHeight: 1.7,
+          }}>
+            <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1, textTransform: "uppercase", marginBottom: 8 }}>
+              Cluster Map (Entity-Adjusted)
+            </div>
+            <div style={{ color: C.text2 }}>
+              ↑ Above: <b style={{ color: C.red, fontFamily: "JetBrains Mono, monospace" }}>
+                {feat.cluster_count_above} clusters · {feat.cluster_supply_above_pct}% supply</b>
+            </div>
+            <div style={{ color: C.text2 }}>
+              ↓ Below: <b style={{ color: C.green, fontFamily: "JetBrains Mono, monospace" }}>
+                {feat.cluster_count_below} clusters · {feat.cluster_supply_below_pct}% supply</b>
+            </div>
+            <div style={{ color: C.text2, marginTop: 4 }}>
+              Nearest cluster ↑: <span style={{ fontFamily: "JetBrains Mono, monospace", color: C.text }}>
+                {feat.nearest_cluster_above_pct != null ? `+${feat.nearest_cluster_above_pct}%` : "—"}</span>
+            </div>
+            <div style={{ color: C.text2 }}>
+              Nearest cluster ↓: <span style={{ fontFamily: "JetBrains Mono, monospace", color: C.text }}>
+                {feat.nearest_cluster_below_pct != null ? `-${feat.nearest_cluster_below_pct}%` : "—"}</span>
+            </div>
+            <div style={{ color: C.text2, marginTop: 4 }}>
+              Air-gap ↑: <span style={{ fontFamily: "JetBrains Mono, monospace", color: C.amber }}>
+                {feat.air_gap_above_pct != null ? `+${feat.air_gap_above_pct}%` : "—"}</span>
+            </div>
+            <div style={{ color: C.text2 }}>
+              Air-gap ↓: <span style={{ fontFamily: "JetBrains Mono, monospace", color: C.amber }}>
+                {feat.air_gap_below_pct != null ? `-${feat.air_gap_below_pct}%` : "—"}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MigrationView({ topo }) {
+  const v = topo.migration?.velocity;
+  const hist = topo.migration?.histogram || [];
+  const cur = topo.current_price;
+
+  // Filter to buckets with meaningful delta (>0.1% supply change), keep ±60% of cur for readability.
+  const data = useMemo(() => {
+    return hist
+      .filter(h => Math.abs(h.delta) > 0.001 && h.price >= cur * 0.4 && h.price <= cur * 1.8)
+      .map(h => ({
+        price: h.price,
+        priceLabel: `$${(h.price / 1000).toFixed(1)}k`,
+        deltaPct: h.delta * 100,
+        relPct: ((h.price / cur) - 1) * 100,
+      }))
+      .sort((a, b) => b.price - a.price);
+  }, [hist, cur]);
+
+  if (!v) {
+    return <div style={{ padding: 40, textAlign: "center", color: C.text3 }}>
+      Insufficient history for 90d migration analysis.
+    </div>;
+  }
+
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16 }}>
+      <div>
+        <div style={{ fontSize: 12, color: C.text3, marginBottom: 8, lineHeight: 1.5 }}>
+          90-day Δ supply share per bucket on Percent-Partitioned URPD (auto-rescaled around current price).
+          Green = supply migrated INTO this band; red = supply LEFT this band.
+        </div>
+        <ResponsiveContainer width="100%" height={Math.max(280, data.length * 14 + 40)}>
+          <BarChart layout="vertical" data={data} margin={{ top: 5, right: 20, left: 6, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="2 2" stroke={C.borderSubtle} horizontal={false} />
+            <XAxis type="number" tick={{ fontSize: 10, fill: C.text3 }}
+              tickFormatter={(val) => `${val > 0 ? "+" : ""}${val.toFixed(1)}%`} />
+            <YAxis type="category" dataKey="priceLabel" tick={{ fontSize: 10, fill: C.text3, fontFamily: "JetBrains Mono, monospace" }}
+              interval={0} width={60} />
+            <Tooltip
+              contentStyle={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 8, fontSize: 11 }}
+              formatter={(v) => [`${v > 0 ? "+" : ""}${v.toFixed(2)}% of supply`, "90d Δ"]}
+              labelFormatter={(label) => `Bucket: ${label}`}
+            />
+            <ReferenceLine x={0} stroke={C.text3} />
+            <Bar dataKey="deltaPct">
+              {data.map((d, i) => (
+                <Cell key={i} fill={d.deltaPct >= 0 ? C.green : C.red} fillOpacity={0.7} />
+              ))}
+            </Bar>
+            <ReferenceLine y={`$${(cur / 1000).toFixed(1)}k`} stroke={C.text} strokeDasharray="4 4" strokeWidth={1.5}
+              label={{ value: "Current", position: "right", fill: C.text, fontSize: 10 }} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        <div style={{
+          padding: 14, background: C.surface, border: `1px solid ${C.borderSubtle}`, borderRadius: 10,
+        }}>
+          <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6 }}>
+            Redistribution Velocity (90d)
+          </div>
+          <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 28, fontWeight: 700, color: C.accent }}>
+            {v.velocity_pct_supply.toFixed(2)}%
+          </div>
+          <div style={{ fontSize: 10, color: C.text3, marginTop: 4 }}>
+            Σ|Δ| / 2 across all buckets. Higher = more structural reshuffling.
+          </div>
+        </div>
+        <div style={{
+          padding: 12, background: C.surface, border: `1px solid ${C.borderSubtle}`, borderRadius: 10,
+        }}>
+          <div style={{ fontSize: 10, color: C.green, letterSpacing: 1, textTransform: "uppercase", marginBottom: 8 }}>
+            Top Inflows
+          </div>
+          {(v.top_inflows || []).slice(0, 5).map((x, i) => (
+            <div key={i} style={{ fontSize: 10, color: C.text2, fontFamily: "JetBrains Mono, monospace", marginBottom: 4 }}>
+              <span style={{ color: C.green, fontWeight: 600 }}>+{x.delta_pct_supply.toFixed(2)}%</span>{" "}
+              <span style={{ color: C.text3 }}>{x.label}</span>
+            </div>
+          ))}
+        </div>
+        <div style={{
+          padding: 12, background: C.surface, border: `1px solid ${C.borderSubtle}`, borderRadius: 10,
+        }}>
+          <div style={{ fontSize: 10, color: C.red, letterSpacing: 1, textTransform: "uppercase", marginBottom: 8 }}>
+            Top Outflows
+          </div>
+          {(v.top_outflows || []).slice(0, 5).map((x, i) => (
+            <div key={i} style={{ fontSize: 10, color: C.text2, fontFamily: "JetBrains Mono, monospace", marginBottom: 4 }}>
+              <span style={{ color: C.red, fontWeight: 600 }}>{x.delta_pct_supply.toFixed(2)}%</span>{" "}
+              <span style={{ color: C.text3 }}>{x.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CycleCompareView({ topo }) {
+  const sims = topo.cycle_compare?.similarities || [];
+  if (!sims.length) return <div style={{ padding: 40, textAlign: "center", color: C.text3 }}>No cycle anchors loaded.</div>;
+  const best = [...sims].sort((a, b) => (b.similarity || 0) - (a.similarity || 0))[0];
+
+  const colorFor = (label) => {
+    const l = label.toLowerCase();
+    if (l.includes("top") || l.includes("peak") || l.includes("ath")) return C.red;
+    if (l.includes("bottom")) return C.green;
+    return C.amber;
+  };
+
+  return (
+    <div>
+      <div style={{ fontSize: 12, color: C.text3, marginBottom: 14, lineHeight: 1.5 }}>
+        Cosine similarity of today's Percent-Partitioned URPD shape vs prior cycle inflection points.
+        Bucket grid auto-rescales to each date's price, so structure (not absolute price) is being matched.
+        ≥0.92 to a top anchor + composite ≥65 fires <code style={{ background: C.borderSubtle, padding: "1px 5px", borderRadius: 3 }}>cycle_top_pattern_match</code>.
+      </div>
+
+      <div style={{
+        padding: 16, background: `${colorFor(best.label)}10`, border: `1px solid ${colorFor(best.label)}40`,
+        borderRadius: 10, marginBottom: 16,
+      }}>
+        <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1, textTransform: "uppercase" }}>
+          Best structural match
+        </div>
+        <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 22, fontWeight: 700, color: colorFor(best.label) }}>
+          {(best.similarity * 100).toFixed(1)}%
+        </div>
+        <div style={{ fontSize: 12, color: C.text2, marginTop: 4 }}>
+          {best.label} <span style={{ color: C.text3 }}>· {best.anchor_date}</span>
+        </div>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {sims.map(s => {
+          const c = colorFor(s.label);
+          const pct = (s.similarity || 0) * 100;
+          return (
+            <div key={s.anchor_date} style={{
+              padding: 12, background: C.surface, border: `1px solid ${C.borderSubtle}`, borderRadius: 8,
+            }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                <div style={{ fontSize: 12, color: C.text }}>
+                  <b>{s.label}</b>{" "}
+                  <span style={{ color: C.text3, fontFamily: "JetBrains Mono, monospace", fontSize: 11 }}>
+                    {s.anchor_date} · ${(s.anchor_price / 1000).toFixed(1)}k
+                  </span>
+                </div>
+                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 14, fontWeight: 700, color: c }}>
+                  {pct.toFixed(1)}%
+                </div>
+              </div>
+              <div style={{ height: 6, background: C.borderSubtle, borderRadius: 3, overflow: "hidden" }}>
+                <div style={{ width: `${pct}%`, height: "100%", background: c, transition: "width 0.4s" }} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function SupplyTopography({ topo }) {
+  const [subTab, setSubTab] = useState("live");
+  if (!topo || topo.error) return null;
+
+  const featEa = topo.live?.entity_adjusted?.features || {};
+  const v = topo.migration?.velocity;
+
+  const tabs = [
+    { id: "live",      label: "Live" },
+    { id: "migration", label: "Migration · 90d" },
+    { id: "cycle",     label: "Cycle Compare" },
+  ];
+
+  return (
+    <Card style={{ marginBottom: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 14 }}>
+        <div>
+          <h2 style={{ fontSize: 14, fontWeight: 700, color: C.text3, letterSpacing: 1.5, textTransform: "uppercase", margin: 0 }}>
+            Supply Topography
+          </h2>
+          <div style={{ fontSize: 11, color: C.text3, marginTop: 4 }}>
+            URPD blend — ATH-Partitioned · Entity-Adjusted · Percent-Partitioned (point-in-time)
+          </div>
+        </div>
+        <div style={{ fontSize: 11, color: C.text3, fontFamily: "JetBrains Mono, monospace" }}>
+          BTC {fmt.usd(topo.current_price)} · ATH {fmt.usd(topo.ath_price)}
+        </div>
+      </div>
+
+      {/* KPI strip */}
+      <div style={{ display: "flex", gap: 10, marginBottom: 14, flexWrap: "wrap" }}>
+        <TopoKpiTile
+          label="Conviction Overhead Ratio"
+          value={featEa.overhead_supply_ratio != null ? featEa.overhead_supply_ratio.toFixed(2) : "—"}
+          sub={`>1.5 = real overhang · raw ${topo.live?.ath_partitioned?.features?.overhead_supply_ratio?.toFixed(2) || "—"}`}
+          color={featEa.overhead_supply_ratio > 1.3 ? C.red : featEa.overhead_supply_ratio < 0.8 ? C.green : C.text}
+        />
+        <TopoKpiTile
+          label="Air-Gap Above"
+          value={featEa.air_gap_above_pct != null ? `+${featEa.air_gap_above_pct}%` : "—"}
+          sub="Distance to nearest vacuum bucket"
+          color={C.amber}
+        />
+        <TopoKpiTile
+          label="Nearest Cluster Below"
+          value={featEa.nearest_cluster_below_pct != null ? `-${featEa.nearest_cluster_below_pct}%` : "—"}
+          sub={`${featEa.cluster_count_below ?? 0} clusters in ±50%`}
+          color={C.green}
+        />
+        <TopoKpiTile
+          label="Redistribution Velocity"
+          value={v?.velocity_pct_supply != null ? `${v.velocity_pct_supply.toFixed(1)}%` : "—"}
+          sub="90d Σ|Δ| / 2 of supply share"
+          color={C.accent}
+        />
+      </div>
+
+      {/* Sub-tab switcher */}
+      <div style={{ display: "flex", gap: 4, marginBottom: 16, borderBottom: `1px solid ${C.borderSubtle}` }}>
+        {tabs.map(t => (
+          <button key={t.id} onClick={() => setSubTab(t.id)} style={{
+            padding: "8px 14px", background: "none", border: "none",
+            borderBottom: subTab === t.id ? `2px solid ${C.accent}` : "2px solid transparent",
+            marginBottom: -1, cursor: "pointer",
+            fontFamily: "Inter, sans-serif", fontSize: 12,
+            fontWeight: subTab === t.id ? 700 : 500,
+            color: subTab === t.id ? C.text : C.text3,
+          }}>{t.label}</button>
+        ))}
+      </div>
+
+      {/* Sub-tab body */}
+      {subTab === "live"      && <LiveHistogramView topo={topo} />}
+      {subTab === "migration" && <MigrationView topo={topo} />}
+      {subTab === "cycle"     && <CycleCompareView topo={topo} />}
+
+      {/* New URPD-derived signals */}
+      <div style={{ marginTop: 16, paddingTop: 14, borderTop: `1px solid ${C.borderSubtle}` }}>
+        <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 8 }}>
+          URPD-Derived Tier-S Signals
+        </div>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+          {(topo.signals || []).map(s => <TopoSignalChip key={s.id} sig={s} />)}
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+
 // ─── HISTORICAL CHART ───────────────────────────────────────────────────────
 function HistoryChart({ history }) {
   const data = useMemo(() => history?.map(h => ({
@@ -889,6 +1323,9 @@ export default function BtcOnChainDashboard() {
         {tab === "validation" ? (
           <ValidationView bt={backtest} />
         ) : (<>
+
+        {/* Supply Topography — URPD blend (top of Live tab) */}
+        <SupplyTopography topo={state.supply_topography} />
 
         {/* Top row: gauge + confluences */}
         <div style={{ display: "grid", gridTemplateColumns: "minmax(300px, 1fr) 2fr 2fr", gap: 20, marginBottom: 20 }}>

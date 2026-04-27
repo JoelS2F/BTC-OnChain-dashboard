@@ -2,6 +2,7 @@ node_modules/
 bundle.js
 btc_onchain_signal_latest.json
 btc_onchain_backtest.json
+urpd_backtest.json
 data/*.json
 !data/.gitkeep
 .DS_Store
