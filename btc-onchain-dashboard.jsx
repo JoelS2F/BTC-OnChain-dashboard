@@ -867,17 +867,24 @@ function HistoryChart({ history, fireEvents }) {
           <ReferenceLine yAxisId="left" y={45} stroke={C.green} strokeDasharray="4 4" strokeOpacity={0.5} />
           <Line yAxisId="right" type="monotone" dataKey="price" stroke={C.text3} strokeWidth={1.5} dot={false} name="BTC Price" />
           <Line yAxisId="left" type="monotone" dataKey="composite" stroke={C.accent} strokeWidth={2.5} dot={false} name="Composite Score" />
-          {/* URPD fire-event markers — green ▲ for bullish-only fires, red ▼ for bearish-only,
-               amber for mixed. Plotted at composite y-value on the date the signal fired. */}
+          {/* URPD fire-event markers — bullish/bearish dots on composite line, with a soft
+               outer halo for visibility against the regime band fills. Plotted at composite
+               y-value on the signal-fire date (snapped to nearest sampled point). */}
           {fireMarkers.map((e, i) => {
             const color = e.net_direction === "bullish" ? C.green
                         : e.net_direction === "bearish" ? C.red
                         : C.amber;
             return (
-              <ReferenceDot key={`fire-${i}`}
-                yAxisId="left" x={e.chartDate} y={e.chartComposite}
-                r={5} fill={color} fillOpacity={0.8} stroke="#fff" strokeWidth={1.5}
-                ifOverflow="visible" />
+              <React.Fragment key={`fire-${i}`}>
+                {/* Halo: larger, semi-transparent ring */}
+                <ReferenceDot yAxisId="left" x={e.chartDate} y={e.chartComposite}
+                  r={11} fill={color} fillOpacity={0.18} stroke="none"
+                  ifOverflow="visible" />
+                {/* Core marker: bold filled dot with thick white stroke */}
+                <ReferenceDot yAxisId="left" x={e.chartDate} y={e.chartComposite}
+                  r={7} fill={color} fillOpacity={1.0} stroke="#fff" strokeWidth={2.5}
+                  ifOverflow="visible" />
+              </React.Fragment>
             );
           })}
         </LineChart>
