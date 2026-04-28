@@ -1,8 +1,8 @@
-import { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   LineChart, Line, AreaChart, Area, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  ReferenceLine, ReferenceArea, Legend, Cell
+  ReferenceLine, ReferenceArea, ReferenceDot, Legend, Cell
 } from "recharts";
 
 // ─── COLORS (Ethena BD Assessment palette) ──────────────────────────────────
@@ -260,14 +260,17 @@ function TopoKpiTile({ label, value, sub, color }) {
 
 function TopoSignalChip({ sig }) {
   const fired = sig.fired;
-  // Edge sign determines bullish/bearish coloring of the chip
+  // Direction determined by signal id (not edge sign — bottom-match has marginal edge
+  // but is structurally a bullish confirmation).
+  const BULL = new Set(["accumulation_cluster_forming", "cycle_bottom_pattern_match"]);
+  const directional = BULL.has(sig.id) ? C.green : C.red;
   const edge = sig.validated_edge_90d;
-  const directional = edge != null ? (edge > 0 ? C.green : C.red) : C.text3;
   const c = fired ? directional : C.text3;
   const labels = {
     conviction_overhang: "Conviction Overhang",
     accumulation_cluster_forming: "Accumulation Forming",
     cycle_top_pattern_match: "Cycle-Top Pattern",
+    cycle_bottom_pattern_match: "Cycle-Bottom Pattern",
   };
   return (
     <div style={{
@@ -658,6 +661,9 @@ function SupplyTopography({ topo }) {
       {subTab === "migration" && <MigrationView topo={topo} />}
       {subTab === "cycle"     && <CycleCompareView topo={topo} />}
 
+      {/* URPD Confluence summary — net direction + validated forward stats */}
+      <ConfluenceSummary confluence={topo.confluence} />
+
       {/* New URPD-derived signals */}
       <div style={{ marginTop: 16, paddingTop: 14, borderTop: `1px solid ${C.borderSubtle}` }}>
         <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 8 }}>
@@ -671,9 +677,83 @@ function SupplyTopography({ topo }) {
   );
 }
 
+function ConfluenceSummary({ confluence }) {
+  if (!confluence) return null;
+  const dir = confluence.net_direction || "none";
+  const stats = confluence.validated_stats_by_direction?.[dir];
+  const dirColor =
+    dir === "bullish" ? C.green :
+    dir === "bearish" ? C.red :
+    dir === "mixed"   ? C.amber :
+    C.text2;
+  const dirLabel =
+    dir === "bullish" ? "BULLISH" :
+    dir === "bearish" ? "BEARISH" :
+    dir === "mixed"   ? "MIXED" :
+    "NEUTRAL";
+
+  return (
+    <div style={{
+      marginTop: 16, paddingTop: 14, borderTop: `1px solid ${C.borderSubtle}`,
+    }}>
+      <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 10 }}>
+        URPD Confluence — net direction × validated forward stats
+      </div>
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "auto 1fr 1fr 1fr 1fr",
+        gap: 10,
+        alignItems: "center",
+        padding: "12px 14px",
+        background: `${dirColor}10`,
+        border: `1px solid ${dirColor}40`,
+        borderRadius: 10,
+      }}>
+        <div>
+          <Pill color="#fff" bg={dirColor}>{dirLabel}</Pill>
+        </div>
+        <div>
+          <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1, textTransform: "uppercase" }}>Fired</div>
+          <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 16, fontWeight: 700, color: C.text }}>
+            {confluence.fired_count}<span style={{ color: C.text3, fontSize: 12, fontWeight: 400 }}>/{confluence.total}</span>
+          </div>
+          <div style={{ fontSize: 10, color: C.text3 }}>
+            {confluence.bullish_fired ? `${confluence.bullish_fired} bull` : ""}
+            {confluence.bullish_fired && confluence.bearish_fired ? " · " : ""}
+            {confluence.bearish_fired ? `${confluence.bearish_fired} bear` : ""}
+          </div>
+        </div>
+        <div>
+          <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1, textTransform: "uppercase" }}>Hist. fwd-90d mean</div>
+          <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 16, fontWeight: 700, color: dirColor }}>
+            {stats?.fwd_90d_mean != null ? `${stats.fwd_90d_mean > 0 ? "+" : ""}${stats.fwd_90d_mean}%` : "—"}
+          </div>
+        </div>
+        <div>
+          <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1, textTransform: "uppercase" }}>Hist. win rate</div>
+          <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 16, fontWeight: 700, color: C.text }}>
+            {stats?.win_rate != null ? `${stats.win_rate}%` : "—"}
+          </div>
+        </div>
+        <div>
+          <div style={{ fontSize: 10, color: C.text3, letterSpacing: 1, textTransform: "uppercase" }}>n historical</div>
+          <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 16, fontWeight: 700, color: C.text2 }}>
+            {stats?.n_historical ?? "—"}
+          </div>
+        </div>
+      </div>
+      <div style={{ fontSize: 10, color: C.text3, marginTop: 6, lineHeight: 1.5 }}>
+        Confluence sweep across 1644 backtest dates: bullish-only fires {(confluence.validated_stats_by_direction?.bullish?.fwd_90d_mean ?? 0).toFixed(1)}% / {confluence.validated_stats_by_direction?.bullish?.win_rate}% win,
+        bearish-only fires {(confluence.validated_stats_by_direction?.bearish?.fwd_90d_mean ?? 0).toFixed(1)}% / {confluence.validated_stats_by_direction?.bearish?.win_rate}% win,
+        no-fire base rate {(confluence.validated_stats_by_direction?.none?.fwd_90d_mean ?? 0).toFixed(1)}% / {confluence.validated_stats_by_direction?.none?.win_rate}% win.
+      </div>
+    </div>
+  );
+}
+
 
 // ─── HISTORICAL CHART ───────────────────────────────────────────────────────
-function HistoryChart({ history }) {
+function HistoryChart({ history, fireEvents }) {
   const data = useMemo(() => history?.map(h => ({
     date: fmt.date(h.date),
     rawDate: h.date,
@@ -681,6 +761,27 @@ function HistoryChart({ history }) {
     price: h.price,
     regime: h.regime,
   })) || [], [history]);
+
+  // Filter URPD fire events to those within the visible history window, then snap
+  // each event to the nearest sampled chart point (history is sampled every ~5d).
+  const fireMarkers = useMemo(() => {
+    if (!fireEvents || !data.length) return [];
+    const dataDates = data.map(d => d.rawDate).sort();
+    const windowStart = dataDates[0];
+    const windowEnd = dataDates[dataDates.length - 1];
+    const visible = fireEvents.filter(e => e.date >= windowStart && e.date <= windowEnd);
+    return visible.map(e => {
+      // Snap to nearest sampled date in the chart
+      const nearest = data.reduce((best, d) =>
+        Math.abs(new Date(d.rawDate) - new Date(e.date)) <
+        Math.abs(new Date(best.rawDate) - new Date(e.date)) ? d : best, data[0]);
+      return {
+        ...e,
+        chartDate: nearest.date,
+        chartComposite: nearest.composite,
+      };
+    });
+  }, [fireEvents, data]);
 
   if (!data.length) return <Card><div style={{ color: C.text3, textAlign: "center", padding: 40 }}>No history data</div></Card>;
 
@@ -693,6 +794,26 @@ function HistoryChart({ history }) {
       <div style={{ fontSize: 11, color: C.text3, marginBottom: 10, lineHeight: 1.5 }}>
         Replays today's signal pipeline against each historical cutoff. Colored zones = regime bands validated in backtest.
       </div>
+      {/* URPD signal markers legend */}
+      {fireMarkers.length > 0 && (
+        <div style={{
+          display: "flex", gap: 14, marginBottom: 8, alignItems: "center",
+          fontSize: 10, color: C.text2,
+        }}>
+          <span style={{ color: C.text3, letterSpacing: 0.5, textTransform: "uppercase" }}>URPD signal fires (last 365d):</span>
+          <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            <span style={{ width: 10, height: 10, borderRadius: 5, background: C.green, border: "1.5px solid #fff" }} />
+            bullish ({fireMarkers.filter(e => e.net_direction === "bullish").length})
+          </span>
+          <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            <span style={{ width: 10, height: 10, borderRadius: 5, background: C.red, border: "1.5px solid #fff" }} />
+            bearish ({fireMarkers.filter(e => e.net_direction === "bearish").length})
+          </span>
+          <span style={{ color: C.text3 }}>
+            · plotted at composite-score y-value on the date URPD signal fired (snapped to nearest sampled point)
+          </span>
+        </div>
+      )}
       {/* Regime legend */}
       <div style={{ display: "flex", gap: 14, marginBottom: 10, flexWrap: "wrap", fontSize: 10 }}>
         {[
@@ -746,6 +867,19 @@ function HistoryChart({ history }) {
           <ReferenceLine yAxisId="left" y={45} stroke={C.green} strokeDasharray="4 4" strokeOpacity={0.5} />
           <Line yAxisId="right" type="monotone" dataKey="price" stroke={C.text3} strokeWidth={1.5} dot={false} name="BTC Price" />
           <Line yAxisId="left" type="monotone" dataKey="composite" stroke={C.accent} strokeWidth={2.5} dot={false} name="Composite Score" />
+          {/* URPD fire-event markers — green ▲ for bullish-only fires, red ▼ for bearish-only,
+               amber for mixed. Plotted at composite y-value on the date the signal fired. */}
+          {fireMarkers.map((e, i) => {
+            const color = e.net_direction === "bullish" ? C.green
+                        : e.net_direction === "bearish" ? C.red
+                        : C.amber;
+            return (
+              <ReferenceDot key={`fire-${i}`}
+                yAxisId="left" x={e.chartDate} y={e.chartComposite}
+                r={5} fill={color} fillOpacity={0.8} stroke="#fff" strokeWidth={1.5}
+                ifOverflow="visible" />
+            );
+          })}
         </LineChart>
       </ResponsiveContainer>
     </Card>
@@ -1102,7 +1236,7 @@ function downloadCsv(filename, rows, headers) {
   URL.revokeObjectURL(url);
 }
 
-function ValidationView({ bt }) {
+function ValidationView({ bt, urpdBt }) {
   if (!bt) {
     return (
       <Card>
@@ -1216,6 +1350,186 @@ function ValidationView({ bt }) {
       <div style={{ marginBottom: 20 }}>
         <RegimeTransitionLog events={bt.regime_transitions} />
       </div>
+
+      {/* URPD section appears below v1 validation when urpd_backtest.json is present */}
+      <URPDValidationSection urpdBt={urpdBt} />
+    </>
+  );
+}
+
+// ─── URPD VALIDATION SECTION (renders inside Validation tab when urpd_backtest.json present) ─
+function URPDValidationSection({ urpdBt }) {
+  if (!urpdBt) return null;
+
+  const SIGNAL_LABELS = {
+    conviction_overhang: "Conviction Overhang",
+    accumulation_cluster_forming: "Accumulation Cluster Forming",
+    cycle_top_pattern_match: "Cycle-Top Pattern Match",
+    cycle_bottom_pattern_match: "Cycle-Bottom Pattern Match",
+  };
+  const BULL_IDS = new Set(["accumulation_cluster_forming", "cycle_bottom_pattern_match"]);
+  const confluence = urpdBt.confluence || {};
+  // Production-gate stats (matches urpd_features.py exactly). Falls back to sweep
+  // grid first row only if the dedicated block isn't present in older backtest runs.
+  const tunedStats = urpdBt.tuned_gate_validation || {};
+  const sweeps = urpdBt.sweeps || {};
+  const findRow = (sigKey) => {
+    if (tunedStats[sigKey]) return tunedStats[sigKey];
+    const sweep = sweeps[sigKey];
+    return sweep && sweep.length ? sweep[0] : null;
+  };
+  const formatGate = (gate) => {
+    if (!gate) return "";
+    return Object.entries(gate).map(([k, v]) =>
+      `${k}=${Array.isArray(v) ? `[${v.join(",")}]` : v}`).join(" · ");
+  };
+
+  return (
+    <>
+      <Card style={{ marginBottom: 20 }}>
+        <SectionTitle right={`${urpdBt.joined_rows} joined rows · ${urpdBt.date_range?.start} → ${urpdBt.date_range?.end}`}>
+          URPD Signal Validation
+        </SectionTitle>
+        <div style={{ fontSize: 12, color: C.text2, lineHeight: 1.6, marginBottom: 14 }}>
+          Walk-forward sweep over the same backtest window. Each signal evaluated at its tuned gate.
+          See <code style={{ background: C.borderSubtle, padding: "2px 6px", borderRadius: 4 }}>urpd_backtest.json</code> for full grid.
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 8 }}>
+          {Object.keys(SIGNAL_LABELS).map(sigKey => {
+            const row = findRow(sigKey);
+            if (!row) return null;
+            const isBull = BULL_IDS.has(sigKey);
+            const dirColor = isBull ? C.green : C.red;
+            const edge = row.edge;
+            const fired = row.fired || {};
+            const gate = row.gate || {};
+            return (
+              <div key={sigKey} style={{
+                display: "grid", gridTemplateColumns: "1fr 80px 100px 90px 90px 100px",
+                gap: 12, alignItems: "center",
+                padding: "10px 14px", background: C.surface,
+                border: `1px solid ${C.borderSubtle}`, borderRadius: 8,
+              }}>
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: C.text }}>
+                    <span style={{ color: dirColor }}>{isBull ? "▲" : "▼"}</span>{" "}
+                    {SIGNAL_LABELS[sigKey]}
+                  </div>
+                  <div style={{ fontSize: 10, color: C.text3, fontFamily: "JetBrains Mono, monospace", marginTop: 2 }}>
+                    gate: {formatGate(gate)}
+                  </div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: 9, color: C.text3, letterSpacing: 0.5, textTransform: "uppercase" }}>fires</div>
+                  <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 14, fontWeight: 700, color: C.text }}>
+                    {row.fire_count}
+                  </div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: 9, color: C.text3, letterSpacing: 0.5, textTransform: "uppercase" }}>fire rate</div>
+                  <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 12, color: C.text2 }}>
+                    {row.fire_rate_pct}%
+                  </div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: 9, color: C.text3, letterSpacing: 0.5, textTransform: "uppercase" }}>fwd-90d mean</div>
+                  <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 14, fontWeight: 700, color: dirColor }}>
+                    {fired.mean != null ? `${fired.mean > 0 ? "+" : ""}${fired.mean}%` : "—"}
+                  </div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: 9, color: C.text3, letterSpacing: 0.5, textTransform: "uppercase" }}>win 90d</div>
+                  <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 12, color: C.text2 }}>
+                    {fired.win_rate != null ? `${fired.win_rate}%` : "—"}
+                  </div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: 9, color: C.text3, letterSpacing: 0.5, textTransform: "uppercase" }}>edge vs idle</div>
+                  <div style={{
+                    fontFamily: "JetBrains Mono, monospace", fontSize: 14, fontWeight: 700,
+                    color: edge != null && edge > 0 ? C.green : edge != null && edge < 0 ? C.red : C.text3,
+                  }}>
+                    {edge != null ? `${edge > 0 ? "+" : ""}${edge}pp` : "—"}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Card>
+
+      <Card style={{ marginBottom: 20 }}>
+        <SectionTitle>URPD Confluence — by Net Direction</SectionTitle>
+        <div style={{ fontSize: 12, color: C.text2, lineHeight: 1.6, marginBottom: 14 }}>
+          All 4 signals evaluated at tuned gates, classified by net direction. The headline finding:
+          bullish-only and bearish-only fires partition the timeline cleanly (mixed never occurs by gate design).
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 10 }}>
+          {[
+            { key: "bullish", label: "BULLISH-ONLY", color: C.green },
+            { key: "bearish", label: "BEARISH-ONLY", color: C.red },
+            { key: "mixed",   label: "MIXED",        color: C.amber },
+            { key: "none",    label: "NONE (BASE)",  color: C.text2 },
+          ].map(({ key, label, color }) => {
+            const stats = confluence.by_net_direction?.[key];
+            if (!stats) return null;
+            const f30 = stats.fwd_30d, f90 = stats.fwd_90d, f180 = stats.fwd_180d;
+            return (
+              <div key={key} style={{
+                padding: 12, background: `${color}10`,
+                border: `1px solid ${color}40`, borderRadius: 10,
+              }}>
+                <div style={{ fontSize: 10, color: color, letterSpacing: 1.2, textTransform: "uppercase", fontWeight: 700, marginBottom: 8 }}>
+                  {label}
+                </div>
+                <div style={{ fontSize: 11, color: C.text2, lineHeight: 1.7, fontFamily: "JetBrains Mono, monospace" }}>
+                  <div>n: <b style={{ color: C.text }}>{stats.n_dates}</b></div>
+                  <div>fwd-30d: <b style={{ color: color }}>{f30?.mean != null ? `${f30.mean > 0 ? "+" : ""}${f30.mean}%` : "—"}</b></div>
+                  <div>fwd-90d: <b style={{ color: color }}>{f90?.mean != null ? `${f90.mean > 0 ? "+" : ""}${f90.mean}%` : "—"}</b></div>
+                  <div>fwd-180d: <b style={{ color: color }}>{f180?.mean != null ? `${f180.mean > 0 ? "+" : ""}${f180.mean}%` : "—"}</b></div>
+                  <div>win 90d: <b style={{ color: C.text }}>{f90?.win_rate != null ? `${f90.win_rate}%` : "—"}</b></div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Card>
+
+      <Card style={{ marginBottom: 20 }}>
+        <SectionTitle>URPD Signal Combinations (which sets fire together)</SectionTitle>
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 60px 90px 90px 70px", gap: 8, fontSize: 11 }}>
+          <div style={{ fontSize: 9, color: C.text3, letterSpacing: 1, textTransform: "uppercase" }}>combination</div>
+          <div style={{ fontSize: 9, color: C.text3, letterSpacing: 1, textTransform: "uppercase", textAlign: "right" }}>n</div>
+          <div style={{ fontSize: 9, color: C.text3, letterSpacing: 1, textTransform: "uppercase", textAlign: "right" }}>fwd-30d</div>
+          <div style={{ fontSize: 9, color: C.text3, letterSpacing: 1, textTransform: "uppercase", textAlign: "right" }}>fwd-90d</div>
+          <div style={{ fontSize: 9, color: C.text3, letterSpacing: 1, textTransform: "uppercase", textAlign: "right" }}>win 90d</div>
+          {Object.entries(confluence.combinations || {}).map(([combo, stats]) => {
+            const f30 = stats.fwd_30d, f90 = stats.fwd_90d;
+            const isBull = combo.includes("accumulation") || combo.includes("bottom");
+            const isBear = combo.includes("conviction_overhang") || combo.includes("top_pattern");
+            const dirColor = isBull && !isBear ? C.green : isBear && !isBull ? C.red : C.amber;
+            return (
+              <React.Fragment key={combo}>
+                <div style={{ fontFamily: "JetBrains Mono, monospace", color: C.text2, padding: "6px 0", borderTop: `1px solid ${C.borderSubtle}` }}>
+                  <span style={{ color: dirColor }}>●</span> {combo}
+                </div>
+                <div style={{ fontFamily: "JetBrains Mono, monospace", textAlign: "right", color: C.text, padding: "6px 0", borderTop: `1px solid ${C.borderSubtle}` }}>
+                  {stats.n_dates}
+                </div>
+                <div style={{ fontFamily: "JetBrains Mono, monospace", textAlign: "right", color: C.text2, padding: "6px 0", borderTop: `1px solid ${C.borderSubtle}` }}>
+                  {f30?.mean != null ? `${f30.mean > 0 ? "+" : ""}${f30.mean}%` : "—"}
+                </div>
+                <div style={{ fontFamily: "JetBrains Mono, monospace", textAlign: "right", color: dirColor, fontWeight: 600, padding: "6px 0", borderTop: `1px solid ${C.borderSubtle}` }}>
+                  {f90?.mean != null ? `${f90.mean > 0 ? "+" : ""}${f90.mean}%` : "—"}
+                </div>
+                <div style={{ fontFamily: "JetBrains Mono, monospace", textAlign: "right", color: C.text2, padding: "6px 0", borderTop: `1px solid ${C.borderSubtle}` }}>
+                  {f90?.win_rate != null ? `${f90.win_rate}%` : "—"}
+                </div>
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </Card>
     </>
   );
 }
@@ -1224,6 +1538,7 @@ function ValidationView({ bt }) {
 export default function BtcOnChainDashboard() {
   const [state, setState] = useState(null);
   const [backtest, setBacktest] = useState(null);
+  const [urpdBacktest, setUrpdBacktest] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState("live");
@@ -1235,10 +1550,14 @@ export default function BtcOnChainDashboard() {
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
         setState(data);
-        // Backtest is optional — silently skip if missing
+        // Backtest + URPD-backtest are optional — silently skip if missing
         try {
           const btResp = await fetch(`btc_onchain_backtest.json?t=${Date.now()}`);
           if (btResp.ok) setBacktest(await btResp.json());
+        } catch (_) { /* ignore */ }
+        try {
+          const ubResp = await fetch(`urpd_backtest.json?t=${Date.now()}`);
+          if (ubResp.ok) setUrpdBacktest(await ubResp.json());
         } catch (_) { /* ignore */ }
       } catch (e) {
         setError(e.message);
@@ -1321,7 +1640,7 @@ export default function BtcOnChainDashboard() {
         </div>
 
         {tab === "validation" ? (
-          <ValidationView bt={backtest} />
+          <ValidationView bt={backtest} urpdBt={urpdBacktest} />
         ) : (<>
 
         {/* Supply Topography — URPD blend (top of Live tab) */}
@@ -1381,7 +1700,7 @@ export default function BtcOnChainDashboard() {
 
         {/* History chart */}
         <div style={{ marginBottom: 20 }}>
-          <HistoryChart history={state.history} />
+          <HistoryChart history={state.history} fireEvents={urpdBacktest?.fire_events} />
         </div>
 
         {/* Metric panel + synopsis */}
