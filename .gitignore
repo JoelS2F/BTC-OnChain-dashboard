@@ -1,9 +1,15 @@
 node_modules/
-bundle.js
-btc_onchain_signal_latest.json
-btc_onchain_backtest.json
-urpd_backtest.json
-data/*.json
-!data/.gitkeep
 .DS_Store
 *.log
+
+# Per-day URPD/feature caches (large; regenerable from Glassnode)
+data/_urpd_full_history.json
+data/_urpd_features_timeline.json
+data/_api_cache.json
+data/_urpd_anchors.json
+data/btc_onchain_*.json
+
+# Daily snapshots — keep latest only, snapshots regenerate
+# (NOTE: btc_onchain_signal_latest.json + btc_onchain_backtest.json + urpd_backtest.json
+#  are now TRACKED so GitHub Pages can serve them)
+

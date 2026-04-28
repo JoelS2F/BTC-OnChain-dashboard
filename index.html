@@ -15,15 +15,99 @@
   #loading { display: flex; align-items: center; justify-content: center; height: 100vh; color: #4B5563; font-size: 14px; flex-direction: column; gap: 12px; }
   #loading .spinner { width: 32px; height: 32px; border: 3px solid #E5E7EB; border-top-color: #2BA6DE; border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Access gate */
+  #gate { display: none; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
+  #gate.active { display: flex; }
+  #gate .card {
+    background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 16px; padding: 36px 32px;
+    max-width: 380px; width: 100%; text-align: center;
+    box-shadow: 0 4px 16px rgba(17, 24, 39, 0.06);
+  }
+  #gate h1 { font-size: 12px; font-weight: 700; color: #9CA3AF; letter-spacing: 2px; text-transform: uppercase; margin: 0 0 8px; }
+  #gate h2 { font-size: 22px; font-weight: 800; color: #111827; margin: 0 0 6px; }
+  #gate p { font-size: 13px; color: #4B5563; margin: 0 0 22px; line-height: 1.5; }
+  #gate input {
+    width: 100%; padding: 12px 14px; border: 1px solid #E5E7EB; border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #111827;
+    outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+    box-sizing: border-box;
+  }
+  #gate input:focus { border-color: #2BA6DE; box-shadow: 0 0 0 3px rgba(43, 166, 222, 0.1); }
+  #gate button {
+    width: 100%; margin-top: 12px; padding: 12px; background: #2BA6DE; color: #FFFFFF;
+    border: none; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px;
+    font-weight: 700; letter-spacing: 0.5px; cursor: pointer; transition: background 0.15s;
+  }
+  #gate button:hover { background: #1E8BBF; }
+  #gate .err { color: #EF4444; font-size: 12px; margin-top: 10px; min-height: 16px; }
+  #gate .footer { margin-top: 24px; font-size: 10px; color: #9CA3AF; letter-spacing: 0.5px; }
 </style>
+<script>
+  // Client-side access-code gate. Code is checked via SHA-256 hash so the
+  // plaintext doesn't ship in the bundle. Stored in sessionStorage so it
+  // persists for the tab session but not across browser restarts.
+  const GATE_KEY = 'btc_onchain_auth_v1';
+  const GATE_HASH = '0272f3431bd98361e120c55ecf4f4c90820d15c2d41cb55ece8ace75e8591344'; // sha256('BTCDash!')
+
+  async function sha256(s) {
+    const b = new TextEncoder().encode(s);
+    const h = await crypto.subtle.digest('SHA-256', b);
+    return Array.from(new Uint8Array(h)).map(x => x.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function checkGate() {
+    if (sessionStorage.getItem(GATE_KEY) === '1') {
+      document.getElementById('gate').classList.remove('active');
+      document.getElementById('root').style.display = 'block';
+      return;
+    }
+    document.getElementById('gate').classList.add('active');
+    document.getElementById('root').style.display = 'none';
+  }
+
+  async function submitGate() {
+    const input = document.getElementById('gate-code');
+    const err = document.getElementById('gate-err');
+    err.textContent = '';
+    const hash = await sha256(input.value);
+    if (hash === GATE_HASH) {
+      sessionStorage.setItem(GATE_KEY, '1');
+      checkGate();
+    } else {
+      err.textContent = 'Incorrect access code';
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    checkGate();
+    const input = document.getElementById('gate-code');
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') submitGate(); });
+    document.getElementById('gate-submit').addEventListener('click', submitGate);
+    input.focus();
+  });
+</script>
 </head>
 <body>
+<div id="gate">
+  <div class="card">
+    <h1>S2F Capital · BTC Intelligence</h1>
+    <h2>BTC On-Chain Signal Engine</h2>
+    <p>This dashboard requires an access code.</p>
+    <input id="gate-code" type="password" placeholder="Access code" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    <button id="gate-submit">Continue</button>
+    <div class="err" id="gate-err"></div>
+    <div class="footer">Glassnode · S2F Capital</div>
+  </div>
+</div>
 <div id="root">
   <div id="loading">
     <div class="spinner"></div>
     <div>Loading BTC On-Chain Signal Engine...</div>
   </div>
 </div>
-<script src="bundle.js?v=1"></script>
+<script src="bundle.js?v=2"></script>
 </body>
 </html>
