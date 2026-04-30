@@ -80,6 +80,73 @@ const Pill = ({ children, color, bg }) => (
   }}>{children}</span>
 );
 
+// ─── FACTOR DIAL ────────────────────────────────────────────────────────────
+function FactorDial({ factor }) {
+  const score = factor.score ?? 50;
+  const fired = factor.fired_extreme_high || factor.fired_extreme_low;
+  const ringColor = factor.fired_extreme_high
+    ? C.red
+    : factor.fired_extreme_low
+      ? C.green
+      : score >= 65 ? C.amber : score <= 35 ? C.green : C.text2;
+  const circumference = 2 * Math.PI * 38;
+  const dash = (score / 100) * circumference;
+  const labels = {
+    valuation: "Valuation",
+    momentum: "Momentum",
+    realized_profit: "Realized P/L",
+    cohort: "Cohort",
+    miner: "Miner",
+    microstructure: "Network",
+  };
+  return (
+    <div style={{
+      background: C.card, border: `1px solid ${fired ? ringColor : C.border}`,
+      borderRadius: 10, padding: 14, position: "relative", overflow: "hidden",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ position: "relative", width: 90, height: 90, flexShrink: 0 }}>
+          <svg width="90" height="90" viewBox="0 0 90 90">
+            <circle cx="45" cy="45" r="38" fill="none" stroke={C.borderSubtle} strokeWidth="6" />
+            <circle
+              cx="45" cy="45" r="38" fill="none" stroke={ringColor} strokeWidth="6"
+              strokeDasharray={`${dash} ${circumference}`}
+              strokeLinecap="round"
+              transform="rotate(-90 45 45)"
+              style={{ transition: "stroke-dasharray 0.6s ease" }}
+            />
+          </svg>
+          <div style={{
+            position: "absolute", inset: 0, display: "flex", flexDirection: "column",
+            alignItems: "center", justifyContent: "center",
+          }}>
+            <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 22, fontWeight: 700, color: C.text }}>
+              {score.toFixed(0)}
+            </div>
+          </div>
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: C.text, marginBottom: 3 }}>
+            {labels[factor.name] || factor.name}
+          </div>
+          {factor.fired_extreme_high && (
+            <Pill color="#fff" bg={C.red}>↑↑ DISTRIBUTE</Pill>
+          )}
+          {factor.fired_extreme_low && (
+            <Pill color="#fff" bg={C.green}>↓↓ ACCUMULATE</Pill>
+          )}
+          {!fired && (
+            <Pill color={C.text3} bg={C.borderSubtle}>NEUTRAL</Pill>
+          )}
+          <div style={{ fontSize: 10, color: C.text3, marginTop: 6, fontFamily: "JetBrains Mono, monospace", lineHeight: 1.4 }}>
+            {factor.rationale}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── COMPOSITE GAUGE ────────────────────────────────────────────────────────
 function CompositeGauge({ score, regime }) {
   const s = Number(score) || 0;
@@ -1690,6 +1757,35 @@ export default function BtcOnChainDashboard() {
             hintHigh="Fired rules signal value / capitulation zone. ≥5 historically marks cycle bottoms."
           />
         </div>
+
+        {/* v1.3 — Factor Model */}
+        {state.factors && state.factors.length > 0 && (
+          <div style={{ marginBottom: 20 }}>
+            <SectionTitle right={
+              <span>
+                <span style={{ color: C.red, fontWeight: 600 }}>{state.factor_distribute_count || 0}/6 distribute</span>
+                {" · "}
+                <span style={{ color: C.green, fontWeight: 600 }}>{state.factor_accumulate_count || 0}/6 accumulate</span>
+                {" · "}
+                <span style={{ color: C.text3 }}>weighted composite {state.composite_score?.toFixed(0)}</span>
+              </span>
+            }>
+              Factor Scores (v1.3)
+            </SectionTitle>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: 12,
+            }}>
+              {state.factors.map(f => <FactorDial key={f.name} factor={f} />)}
+            </div>
+            <div style={{ fontSize: 11, color: C.text3, marginTop: 12, lineHeight: 1.5 }}>
+              <strong>How to read</strong>: each factor is a percentile-rank composite over 4Y. ≥80 = top extreme, ≤20 = bottom extreme.
+              <strong> 6/6 distribute factors</strong> firing simultaneously historically marks cycle tops (n=10, mean −37.7% 90d, 0% win).
+              Independent of legacy composite (currently {state.legacy_composite_score?.toFixed(0)} → {state.legacy_regime}).
+            </div>
+          </div>
+        )}
 
         {/* Tier-S signals */}
         <div style={{ marginBottom: 20 }}>
