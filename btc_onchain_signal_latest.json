@@ -1,6 +1,6 @@
 {
   "schema": "btc_onchain_signal_v1.3",
-  "generated_at": "2026-04-30T18:28:33+00:00",
+  "generated_at": "2026-04-30T18:30:55+00:00",
   "asset": "BTC",
   "composite_score": 28.3,
   "regime": "ACCUMULATE",
@@ -1060,7 +1060,7 @@
   ],
   "supply_topography": {
     "schema": "supply_topography_v1",
-    "fetched_at": "2026-04-30T18:31:04+00:00",
+    "fetched_at": "2026-04-30T18:33:23+00:00",
     "current_price": 76303.3268605842,
     "ath_price": 126223.317922832,
     "live": {
