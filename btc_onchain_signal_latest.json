@@ -1,94 +1,94 @@
 {
   "schema": "btc_onchain_signal_v1.3",
-  "generated_at": "2026-05-08T04:11:00+00:00",
+  "generated_at": "2026-05-09T04:10:48+00:00",
   "asset": "BTC",
-  "composite_score": 37.2,
+  "composite_score": 38.3,
   "regime": "ACCUMULATE",
   "factor_distribute_count": 0,
   "factor_accumulate_count": 0,
   "factors": [
     {
       "name": "valuation",
-      "score": 42.9337899543379,
+      "score": 42.86529680365297,
       "fired_extreme_high": false,
       "fired_extreme_low": false,
       "components": {
-        "mvrv": 40.342465753424655,
-        "nupl": 40.342465753424655,
-        "reserve_risk": 39.863013698630134,
-        "rhodl": 42.054794520547944,
-        "mctc": 52.12328767123287,
+        "mvrv": 40.47945205479452,
+        "nupl": 40.47945205479452,
+        "reserve_risk": 40.0,
+        "rhodl": 41.16438356164384,
+        "mctc": 52.19178082191781,
         "mvrv_z_score": 42.87671232876713
       },
       "rationale": "4Y pct rank avg of MVRV/NUPL/RR/RHODL/MCTC/MVRV-Z = 42.9"
     },
     {
       "name": "momentum",
-      "score": 21.99083385389865,
+      "score": 22.14132286561586,
       "fired_extreme_high": false,
       "fired_extreme_low": false,
       "components": {
-        "mayer_4y_pct": 35.75342465753425,
-        "mayer_multiple": 0.9603818719115685,
-        "pi_cycle_distance_pct": -61.51619578596544,
-        "pi_cycle_score": 17.97840561871275,
-        "two_year_ma_ratio_to_5x": 0.18361006928173434,
-        "two_year_ma_score": 12.240671285448956,
+        "mayer_4y_pct": 36.23287671232877,
+        "mayer_multiple": 0.9642256262473432,
+        "pi_cycle_distance_pct": -61.55527972774546,
+        "pi_cycle_score": 17.92629369633939,
+        "two_year_ma_ratio_to_5x": 0.18397197282269126,
+        "two_year_ma_score": 12.264798188179418,
         "pi_fired_top": false,
         "pi_fired_bottom": false,
         "two_year_fired_top": false,
         "two_year_fired_bottom": true
       },
-      "rationale": "Mayer pct=36, Pi-distance=-61.5%, 2YMA ratio=0.18"
+      "rationale": "Mayer pct=36, Pi-distance=-61.6%, 2YMA ratio=0.18"
     },
     {
       "name": "realized_profit",
-      "score": 44.81735159817351,
+      "score": 46.09589041095891,
       "fired_extreme_high": false,
       "fired_extreme_low": false,
       "components": {
-        "asopr_7d_pct": 50.54794520547945,
-        "rpl_to_mcap_pct": 53.35616438356164,
+        "asopr_7d_pct": 52.465753424657535,
+        "rpl_to_mcap_pct": 55.27397260273973,
         "supply_profit_pct_4y": 30.547945205479454
       },
-      "rationale": "aSOPR 7d/RPL-MCap/Supply-Profit 4Y pct avg = 44.8"
+      "rationale": "aSOPR 7d/RPL-MCap/Supply-Profit 4Y pct avg = 46.1"
     },
     {
       "name": "cohort",
-      "score": 43.18493150684932,
+      "score": 43.27054794520548,
       "fired_extreme_high": false,
       "fired_extreme_low": false,
       "components": {
-        "sth_mvrv_pct": 47.73972602739726,
-        "sth_sopr_pct": 59.24657534246576,
+        "sth_mvrv_pct": 48.83561643835617,
+        "sth_sopr_pct": 60.47945205479452,
         "lth_mvrv_pct": 41.02739726027397,
-        "lth_sopr_pct": 24.726027397260275
+        "lth_sopr_pct": 22.73972602739726
       },
-      "rationale": "STH/LTH MVRV+SOPR 4Y pct avg = 43.2"
+      "rationale": "STH/LTH MVRV+SOPR 4Y pct avg = 43.3"
     },
     {
       "name": "miner",
-      "score": 35.0,
+      "score": 37.465753424657535,
       "fired_extreme_high": false,
       "fired_extreme_low": false,
       "components": {
-        "puell_4y_pct": 35.0,
-        "puell_multiple": 0.8247400230934175,
+        "puell_4y_pct": 37.465753424657535,
+        "puell_multiple": 0.8462464521843002,
         "fired_top_4x": false,
         "fired_bottom_0_5": false
       },
-      "rationale": "Puell=0.82 (4Y pct=35)"
+      "rationale": "Puell=0.85 (4Y pct=37)"
     },
     {
       "name": "microstructure",
-      "score": 30.89041095890411,
+      "score": 38.76712328767123,
       "fired_extreme_high": false,
       "fired_extreme_low": false,
       "components": {
-        "tv_sma30_sma90_ratio": 0.9171715870550793,
-        "tv_ratio_4y_pct": 30.89041095890411
+        "tv_sma30_sma90_ratio": 0.9411530458450297,
+        "tv_ratio_4y_pct": 38.76712328767123
       },
-      "rationale": "TV-adj 30/90 ratio=0.92 (4Y pct=31)"
+      "rationale": "TV-adj 30/90 ratio=0.94 (4Y pct=39)"
     }
   ],
   "factor_weights": {
@@ -108,74 +108,74 @@
       "id": "blow_off",
       "name": "Blow-Off Signal",
       "fired": false,
-      "score": 21.04915185505423,
+      "score": 21.195466318653516,
       "direction": "neutral",
       "components": {
-        "blue_composite": 21.04915185505423,
-        "purple_mctc": 20.290127056205883,
-        "blue_4y_percentile": 32.80821917808219,
-        "mvrv": 1.4749083620972758,
-        "sopr_adj": 1.0009177578480188,
-        "reserve_risk": 0.0011985083916647024
+        "blue_composite": 21.195466318653516,
+        "purple_mctc": 20.491572399482283,
+        "blue_4y_percentile": 32.87671232876712,
+        "mvrv": 1.478198633130047,
+        "sopr_adj": 1.001032883192366,
+        "reserve_risk": 0.0012001652809554223
       },
-      "rationale": "Blue 21.0 vs Purple 20.3 (Blue 4Y pct=33) \u2014 MVRV=1.47 aSOPR=1.001 ReserveRisk=0.0012"
+      "rationale": "Blue 21.2 vs Purple 20.5 (Blue 4Y pct=33) \u2014 MVRV=1.48 aSOPR=1.001 ReserveRisk=0.0012"
     },
     {
       "id": "take_profit_3b",
       "name": "$3B Take Profit",
       "fired": false,
-      "score": 27.616054172378448,
+      "score": 26.04776544528093,
       "direction": "neutral",
       "components": {
-        "net_rpl_7d_usd": 395319414.7262686,
-        "nupl": 0.321991775422563,
-        "rhodl_percentile": 42.054794520547944
+        "net_rpl_7d_usd": 327934419.86754066,
+        "nupl": 0.3235009303976141,
+        "rhodl_percentile": 41.16438356164384
       },
-      "rationale": "Net RPL 7dma $0.40B (threshold $3B) \u2014 NUPL=0.32 RHODL pct=42"
+      "rationale": "Net RPL 7dma $0.33B (threshold $3B) \u2014 NUPL=0.32 RHODL pct=41"
     },
     {
       "id": "sth_confidence",
       "name": "STH Confidence Macro",
       "fired": false,
-      "score": 38.04146081489915,
+      "score": 38.5668956126607,
       "direction": "neutral",
       "components": {
-        "sopr_sth": 1.003823943070601,
-        "mvrv_sth": 1.011294892795986,
-        "sopr_sth_roc30d": 0.49346019170280503,
-        "mvrv_sth_roc30d": 14.783937593668325,
+        "sopr_sth": 1.0042698651566007,
+        "mvrv_sth": 1.0143196303436035,
+        "sopr_sth_roc30d": -0.7682985972338373,
+        "mvrv_sth_roc30d": 16.289807385324433,
         "persistent_bull_5d": false,
         "persistent_bear_5d": false
       },
-      "rationale": "STH-SOPR=1.004 RoC30d=+0.5% | STH-MVRV=1.011 RoC30d=+14.8% \u2014 no persistent direction"
+      "rationale": "STH-SOPR=1.004 RoC30d=-0.8% | STH-MVRV=1.014 RoC30d=+16.3% \u2014 no persistent direction"
     },
     {
       "id": "lth_capitulation",
       "name": "LTH Capitulation",
       "fired": false,
-      "score": 39.38331716950805,
+      "score": 44.619637177302366,
       "direction": "neutral",
       "components": {
-        "sopr_lth": 0.9106667590313826,
-        "mvrv_lth": 1.6643670300039426,
-        "sopr_lth_roc14d": -11.878169058580271,
-        "drawdown_365d_pct": -35.84479544177532,
+        "sopr_lth": 0.8807449304154151,
+        "mvrv_lth": 1.6663756744331457,
+        "sopr_lth_roc14d": -26.043372923444924,
+        "drawdown_365d_pct": -35.6991111321925,
         "both_below_1": false,
         "inflecting_up": false,
         "deep_drawdown": true
       },
-      "rationale": "LTH-SOPR=0.911 LTH-MVRV=1.664 \u2014 not at capitulation (DD=-36%)"
+      "rationale": "LTH-SOPR=0.881 LTH-MVRV=1.666 \u2014 not at capitulation (DD=-36%)"
     },
     {
       "id": "transfer_volume_momo",
       "name": "Transfer Volume Momentum",
       "fired": false,
-      "score": 40.75098661007539,
+      "score": 39.416628918967504,
       "direction": "neutral",
       "components": {
-        "tv_sma30_sma90_ratio": 0.9445059196604523
+        "tv_sma30_sma90_ratio": 0.936499773513805
       },
-      "rationale": "TV-adj 30dma/90dma = 0.945 (bull\u22651.15, bear\u22640.85)"
+      "rationale": "TV-adj 30dma/90dma = 0.936 (bull\u22651.15, bear\u22640.85)"
     }
   ],
   "cycle_top_rules": [
@@ -183,70 +183,70 @@
       "id": "mvrv",
       "description": "Entity-Adj MVRV \u2265 3.7",
       "fired": false,
-      "value": 1.4749083620972758,
+      "value": 1.478198633130047,
       "threshold": ">= 3.7"
     },
     {
       "id": "nupl",
       "description": "NUPL \u2265 0.75 (Euphoria)",
       "fired": false,
-      "value": 0.321991775422563,
+      "value": 0.3235009303976141,
       "threshold": ">= 0.75"
     },
     {
       "id": "sopr_adj_7d",
       "description": "aSOPR 7d SMA \u2265 1.04",
       "fired": false,
-      "value": 1.0119890025191574,
+      "value": 1.0100323157205058,
       "threshold": ">= 1.04"
     },
     {
       "id": "supply_profit",
       "description": "Supply in Profit \u2265 95%",
       "fired": false,
-      "value": 0.6523309945967183,
+      "value": 0.6523450939248623,
       "threshold": ">= 0.95"
     },
     {
       "id": "reserve_risk",
       "description": "Reserve Risk \u2265 0.02",
       "fired": false,
-      "value": 0.0011985083916647024,
+      "value": 0.0012001652809554223,
       "threshold": ">= 0.02"
     },
     {
       "id": "mctc",
       "description": "Mkt Cap/Thermocap 4Y pct \u2265 90",
       "fired": false,
-      "value": 52.12328767123287,
+      "value": 52.19178082191781,
       "threshold": ">= 90.0"
     },
     {
       "id": "rhodl",
       "description": "RHODL Ratio \u2265 50,000",
       "fired": false,
-      "value": 1283.21558713905,
+      "value": 1265.9660030451525,
       "threshold": ">= 50000.0"
     },
     {
       "id": "rpl_to_mcap",
       "description": "Net Realized P/L 7dma \u2265 2% Mkt Cap",
       "fired": false,
-      "value": 0.00024671788837503996,
+      "value": 0.000204194694385099,
       "threshold": ">= 0.02"
     },
     {
       "id": "mayer",
       "description": "Mayer Multiple \u2265 2.4",
       "fired": false,
-      "value": 0.9620410134509215,
+      "value": 0.9659906342493367,
       "threshold": ">= 2.4"
     },
     {
       "id": "mvrv_sth",
       "description": "STH-MVRV \u2265 1.6",
       "fired": false,
-      "value": 1.011294892795986,
+      "value": 1.0143196303436035,
       "threshold": ">= 1.6"
     }
   ],
@@ -255,70 +255,70 @@
       "id": "mvrv",
       "description": "Entity-Adj MVRV \u2264 1.0",
       "fired": false,
-      "value": 1.4749083620972758,
+      "value": 1.478198633130047,
       "threshold": "<= 1.0"
     },
     {
       "id": "nupl",
       "description": "NUPL \u2264 0 (Capitulation)",
       "fired": false,
-      "value": 0.321991775422563,
+      "value": 0.3235009303976141,
       "threshold": "<= 0.0"
     },
     {
       "id": "sopr_adj_7d",
       "description": "aSOPR 7d SMA \u2264 0.98",
       "fired": false,
-      "value": 1.0119890025191574,
+      "value": 1.0100323157205058,
       "threshold": "<= 0.98"
     },
     {
       "id": "supply_profit",
       "description": "Supply in Profit \u2264 60%",
       "fired": false,
-      "value": 0.6523309945967183,
+      "value": 0.6523450939248623,
       "threshold": "<= 0.6"
     },
     {
       "id": "reserve_risk",
       "description": "Reserve Risk \u2264 0.0025",
       "fired": true,
-      "value": 0.0011985083916647024,
+      "value": 0.0012001652809554223,
       "threshold": "<= 0.0025"
     },
     {
       "id": "mctc",
       "description": "Mkt Cap/Thermocap 4Y pct \u2264 10",
       "fired": false,
-      "value": 52.12328767123287,
+      "value": 52.19178082191781,
       "threshold": "<= 10.0"
     },
     {
       "id": "rhodl",
       "description": "RHODL Ratio \u2264 4,000",
       "fired": true,
-      "value": 1283.21558713905,
+      "value": 1265.9660030451525,
       "threshold": "<= 4000.0"
     },
     {
       "id": "mayer",
       "description": "Mayer Multiple \u2264 1.0 (below 200D)",
       "fired": true,
-      "value": 0.9620410134509215,
+      "value": 0.9659906342493367,
       "threshold": "<= 1.0"
     },
     {
       "id": "sopr_lth",
       "description": "LTH-SOPR \u2264 1.0 (LTH losses)",
       "fired": true,
-      "value": 0.9106667590313826,
+      "value": 0.8807449304154151,
       "threshold": "<= 1.0"
     },
     {
       "id": "mvrv_sth",
       "description": "STH-MVRV \u2264 0.9 (STH underwater)",
       "fired": false,
-      "value": 1.011294892795986,
+      "value": 1.0143196303436035,
       "threshold": "<= 0.9"
     }
   ],
@@ -329,11 +329,11 @@
     },
     "take_profit_3b": {
       "last_date": "2024-12-23",
-      "days_ago": 500
+      "days_ago": 501
     },
     "sth_confidence": {
       "last_date": "2026-03-01",
-      "days_ago": 67
+      "days_ago": 68
     },
     "lth_capitulation": {
       "last_date": null,
@@ -341,49 +341,29 @@
     },
     "transfer_volume_momo": {
       "last_date": "2026-05-03",
-      "days_ago": 4
+      "days_ago": 5
     }
   },
   "latest_values": {
-    "price_usd": 80011.0661804087,
-    "mvrv": 1.4749083620972758,
-    "nupl": 0.321991775422563,
-    "reserve_risk": 0.0011985083916647024,
-    "mctc": 17.877383612254594,
-    "rhodl": 1283.21558713905,
-    "supply_profit_pct": 0.6523309945967183,
-    "sopr_adj": 1.0009177578480188,
-    "sopr_lth": 0.9106667590313826,
-    "sopr_sth": 1.003823943070601,
-    "mvrv_lth": 1.6643670300039426,
-    "mvrv_sth": 1.011294892795986,
-    "puell_multiple": 0.8247400230934175,
-    "mvrv_z_score": 0.890253544398234
+    "price_usd": 80192.7561464176,
+    "mvrv": 1.478198633130047,
+    "nupl": 0.3235009303976141,
+    "reserve_risk": 0.0012001652809554223,
+    "mctc": 17.911057165100864,
+    "rhodl": 1265.9660030451525,
+    "supply_profit_pct": 0.6523450939248623,
+    "sopr_adj": 1.001032883192366,
+    "sopr_lth": 0.8807449304154151,
+    "sopr_sth": 1.0042698651566007,
+    "mvrv_lth": 1.6663756744331457,
+    "mvrv_sth": 1.0143196303436035,
+    "puell_multiple": 0.8462464521843002,
+    "mvrv_z_score": 0.8954444744110517
   },
   "history": [
     {
-      "date": "2025-05-08",
-      "price": 103264.778625663,
-      "composite": 47.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 1,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-05-13",
-      "price": 104119.197357816,
-      "composite": 42.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 2,
-      "acc_count": 2,
-      "fired_signals": [
-        "sth_confidence"
-      ]
-    },
-    {
-      "date": "2025-05-18",
-      "price": 106505.0154357,
+      "date": "2025-05-09",
+      "price": 102981.796358804,
       "composite": 39.0,
       "regime": "ACCUMULATE",
       "cycle_count": 1,
@@ -393,257 +373,19 @@
       ]
     },
     {
-      "date": "2025-05-23",
-      "price": 107355.200436426,
-      "composite": 53.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 3,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-05-28",
-      "price": 107818.812865523,
-      "composite": 53.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 2,
-      "acc_count": 1,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-06-02",
-      "price": 105910.305712728,
-      "composite": 47.0,
-      "regime": "NEUTRAL",
+      "date": "2025-05-14",
+      "price": 103525.737928456,
+      "composite": 39.0,
+      "regime": "ACCUMULATE",
       "cycle_count": 1,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-06-07",
-      "price": 105595.848852138,
-      "composite": 50.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 1,
-      "acc_count": 1,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-06-12",
-      "price": 105767.964731629,
-      "composite": 47.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 1,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-06-17",
-      "price": 104598.98824648,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-06-22",
-      "price": 101084.251485656,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-06-27",
-      "price": 107094.077124514,
-      "composite": 47.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 1,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-07-02",
-      "price": 108869.592034958,
-      "composite": 50.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 2,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-07-07",
-      "price": 108263.987359252,
-      "composite": 50.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 2,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-07-12",
-      "price": 117412.432013394,
-      "composite": 53.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 3,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-07-17",
-      "price": 119212.470588653,
-      "composite": 48.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 3,
-      "acc_count": 1,
-      "fired_signals": [
-        "sth_confidence"
-      ]
-    },
-    {
-      "date": "2025-07-22",
-      "price": 119963.29839406,
-      "composite": 48.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 3,
-      "acc_count": 1,
-      "fired_signals": [
-        "sth_confidence"
-      ]
-    },
-    {
-      "date": "2025-07-27",
-      "price": 119419.990860318,
-      "composite": 53.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 2,
-      "acc_count": 1,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-08-01",
-      "price": 113285.64608306,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-08-06",
-      "price": 115031.363610771,
-      "composite": 47.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 1,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-08-11",
-      "price": 118680.731532537,
-      "composite": 50.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 2,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-08-16",
-      "price": 117465.102784994,
-      "composite": 47.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 1,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-08-21",
-      "price": 112518.639569051,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-08-26",
-      "price": 111809.215070013,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-08-31",
-      "price": 108303.473913268,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-09-05",
-      "price": 110671.777093401,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-09-10",
-      "price": 113973.151730465,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-09-15",
-      "price": 115399.127560279,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-09-20",
-      "price": 115734.809307906,
-      "composite": 36.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
       "acc_count": 2,
       "fired_signals": [
         "sth_confidence"
       ]
     },
     {
-      "date": "2025-09-25",
-      "price": 109074.230529918,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-09-30",
-      "price": 114063.275796585,
-      "composite": 44.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 2,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-10-05",
-      "price": 123537.465178982,
+      "date": "2025-05-19",
+      "price": 105604.642906113,
       "composite": 42.0,
       "regime": "ACCUMULATE",
       "cycle_count": 2,
@@ -653,8 +395,53 @@
       ]
     },
     {
-      "date": "2025-10-10",
-      "price": 113039.345857058,
+      "date": "2025-05-24",
+      "price": 107679.52734887,
+      "composite": 53.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 3,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-05-29",
+      "price": 105609.901855557,
+      "composite": 50.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 2,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-06-03",
+      "price": 105443.377497846,
+      "composite": 47.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 0,
+      "acc_count": 1,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-06-08",
+      "price": 105792.065783082,
+      "composite": 50.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 1,
+      "acc_count": 1,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-06-13",
+      "price": 106124.145890678,
+      "composite": 47.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 1,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-06-18",
+      "price": 104946.353111106,
       "composite": 44.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -662,8 +449,8 @@
       "fired_signals": []
     },
     {
-      "date": "2025-10-15",
-      "price": 110815.266921698,
+      "date": "2025-06-23",
+      "price": 105439.547965419,
       "composite": 44.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -671,8 +458,77 @@
       "fired_signals": []
     },
     {
-      "date": "2025-10-20",
-      "price": 110584.822523732,
+      "date": "2025-06-28",
+      "price": 107325.30624355,
+      "composite": 47.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 1,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-07-03",
+      "price": 109616.937339918,
+      "composite": 47.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 1,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-07-08",
+      "price": 108931.620032372,
+      "composite": 50.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 2,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-07-13",
+      "price": 119057.209940597,
+      "composite": 45.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 3,
+      "acc_count": 2,
+      "fired_signals": [
+        "sth_confidence"
+      ]
+    },
+    {
+      "date": "2025-07-18",
+      "price": 117963.57142746,
+      "composite": 48.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 3,
+      "acc_count": 1,
+      "fired_signals": [
+        "sth_confidence"
+      ]
+    },
+    {
+      "date": "2025-07-23",
+      "price": 118782.079633197,
+      "composite": 48.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 3,
+      "acc_count": 1,
+      "fired_signals": [
+        "sth_confidence"
+      ]
+    },
+    {
+      "date": "2025-07-28",
+      "price": 118050.099658849,
+      "composite": 50.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 2,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-08-02",
+      "price": 112571.297323537,
       "composite": 44.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -680,8 +536,44 @@
       "fired_signals": []
     },
     {
-      "date": "2025-10-25",
-      "price": 111656.14021356,
+      "date": "2025-08-07",
+      "price": 117489.390741479,
+      "composite": 50.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 2,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-08-12",
+      "price": 120103.60041267,
+      "composite": 50.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 2,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-08-17",
+      "price": 117478.934514884,
+      "composite": 47.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 1,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-08-22",
+      "price": 116903.486815059,
+      "composite": 47.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 1,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-08-27",
+      "price": 111288.993652357,
       "composite": 44.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -689,8 +581,127 @@
       "fired_signals": []
     },
     {
-      "date": "2025-10-30",
-      "price": 108342.85615097,
+      "date": "2025-09-01",
+      "price": 109255.586298373,
+      "composite": 44.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-09-06",
+      "price": 110224.567575368,
+      "composite": 44.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-09-11",
+      "price": 115507.416571815,
+      "composite": 44.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-09-16",
+      "price": 116826.684150381,
+      "composite": 47.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 1,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-09-21",
+      "price": 115287.441213986,
+      "composite": 44.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-09-26",
+      "price": 109733.466164108,
+      "composite": 44.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-10-01",
+      "price": 118646.283465771,
+      "composite": 50.0,
+      "regime": "NEUTRAL",
+      "cycle_count": 2,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-10-06",
+      "price": 124714.848516762,
+      "composite": 42.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 2,
+      "acc_count": 2,
+      "fired_signals": [
+        "sth_confidence"
+      ]
+    },
+    {
+      "date": "2025-10-11",
+      "price": 110810.242745388,
+      "composite": 44.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-10-16",
+      "price": 108229.050757824,
+      "composite": 44.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-10-21",
+      "price": 108368.509722285,
+      "composite": 44.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-10-26",
+      "price": 114583.603528519,
+      "composite": 44.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-10-31",
+      "price": 109619.819306068,
+      "composite": 44.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 2,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-11-05",
+      "price": 103971.149190052,
       "composite": 41.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -698,8 +709,8 @@
       "fired_signals": []
     },
     {
-      "date": "2025-11-04",
-      "price": 101583.635565302,
+      "date": "2025-11-10",
+      "price": 105997.950274382,
       "composite": 41.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -707,17 +718,8 @@
       "fired_signals": []
     },
     {
-      "date": "2025-11-09",
-      "price": 104725.540876362,
-      "composite": 41.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 3,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-11-14",
-      "price": 94667.6980316109,
+      "date": "2025-11-15",
+      "price": 95637.0452551772,
       "composite": 38.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -725,8 +727,8 @@
       "fired_signals": []
     },
     {
-      "date": "2025-11-19",
-      "price": 91527.1735071698,
+      "date": "2025-11-20",
+      "price": 86587.3725510952,
       "composite": 38.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -734,8 +736,8 @@
       "fired_signals": []
     },
     {
-      "date": "2025-11-24",
-      "price": 88313.8112235453,
+      "date": "2025-11-25",
+      "price": 87366.7338865582,
       "composite": 41.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -743,8 +745,8 @@
       "fired_signals": []
     },
     {
-      "date": "2025-11-29",
-      "price": 90835.2626005808,
+      "date": "2025-11-30",
+      "price": 90401.7060384886,
       "composite": 38.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -752,8 +754,8 @@
       "fired_signals": []
     },
     {
-      "date": "2025-12-04",
-      "price": 92111.4096179589,
+      "date": "2025-12-05",
+      "price": 89367.6048010023,
       "composite": 38.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -761,17 +763,8 @@
       "fired_signals": []
     },
     {
-      "date": "2025-12-09",
-      "price": 92701.4808800457,
-      "composite": 41.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 3,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-12-14",
-      "price": 88194.6433718845,
+      "date": "2025-12-10",
+      "price": 92044.5260657175,
       "composite": 38.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -779,8 +772,8 @@
       "fired_signals": []
     },
     {
-      "date": "2025-12-19",
-      "price": 88132.3337994023,
+      "date": "2025-12-15",
+      "price": 86459.5402483796,
       "composite": 38.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -788,80 +781,8 @@
       "fired_signals": []
     },
     {
-      "date": "2025-12-24",
-      "price": 87642.0849744413,
-      "composite": 38.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 4,
-      "fired_signals": []
-    },
-    {
-      "date": "2025-12-29",
-      "price": 87160.075472716,
-      "composite": 38.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 4,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-01-03",
-      "price": 90606.8149679688,
-      "composite": 41.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 3,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-01-08",
-      "price": 91031.7449513942,
-      "composite": 41.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 3,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-01-13",
-      "price": 95336.3777373708,
-      "composite": 41.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 3,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-01-18",
-      "price": 93649.9710544255,
-      "composite": 41.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 3,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-01-23",
-      "price": 89520.8022481017,
-      "composite": 41.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 3,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-01-28",
-      "price": 89192.9582213948,
-      "composite": 41.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 3,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-02-02",
-      "price": 78733.1765033467,
+      "date": "2025-12-20",
+      "price": 88367.8706120294,
       "composite": 35.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -869,37 +790,118 @@
       "fired_signals": []
     },
     {
-      "date": "2026-02-07",
-      "price": 69269.3602005521,
-      "composite": 36.0,
+      "date": "2025-12-25",
+      "price": 87211.8447167885,
+      "composite": 38.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 4,
+      "fired_signals": []
+    },
+    {
+      "date": "2025-12-30",
+      "price": 88428.1988620674,
+      "composite": 38.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 4,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-01-04",
+      "price": 91485.25336134,
+      "composite": 41.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 3,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-01-09",
+      "price": 90542.0107208209,
+      "composite": 38.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 4,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-01-14",
+      "price": 96917.9397276158,
+      "composite": 41.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 3,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-01-19",
+      "price": 92583.9042441966,
+      "composite": 41.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 3,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-01-24",
+      "price": 89153.8461670402,
+      "composite": 41.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 3,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-01-29",
+      "price": 84601.2823587058,
+      "composite": 35.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 5,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-02-03",
+      "price": 75716.5664692014,
+      "composite": 29.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 7,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-02-08",
+      "price": 70339.0496837085,
+      "composite": 32.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
       "acc_count": 6,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-02-13",
+      "price": 68859.0635766772,
+      "composite": 33.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 7,
       "fired_signals": [
         "sth_confidence"
       ]
     },
     {
-      "date": "2026-02-12",
-      "price": 66248.1233279265,
-      "composite": 29.0,
+      "date": "2026-02-18",
+      "price": 66482.3899978355,
+      "composite": 32.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
-      "acc_count": 7,
+      "acc_count": 6,
       "fired_signals": []
     },
     {
-      "date": "2026-02-17",
-      "price": 67503.5250146202,
-      "composite": 29.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 7,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-02-22",
-      "price": 67658.0129483908,
+      "date": "2026-02-23",
+      "price": 64669.6835476588,
       "composite": 39.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -909,8 +911,8 @@
       ]
     },
     {
-      "date": "2026-02-27",
-      "price": 65896.6155382556,
+      "date": "2026-02-28",
+      "price": 67040.3084018812,
       "composite": 36.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -920,8 +922,26 @@
       ]
     },
     {
-      "date": "2026-03-04",
-      "price": 72691.2510514572,
+      "date": "2026-03-05",
+      "price": 70880.5967478895,
+      "composite": 32.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 6,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-03-10",
+      "price": 69950.7502400302,
+      "composite": 32.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 6,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-03-15",
+      "price": 72805.7068200337,
       "composite": 35.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -929,8 +949,8 @@
       "fired_signals": []
     },
     {
-      "date": "2026-03-09",
-      "price": 68444.0494041355,
+      "date": "2026-03-20",
+      "price": 70504.1086044815,
       "composite": 32.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -938,8 +958,8 @@
       "fired_signals": []
     },
     {
-      "date": "2026-03-14",
-      "price": 71210.954807485,
+      "date": "2026-03-25",
+      "price": 71303.5184620582,
       "composite": 35.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -947,8 +967,8 @@
       "fired_signals": []
     },
     {
-      "date": "2026-03-19",
-      "price": 69922.5894957813,
+      "date": "2026-03-30",
+      "price": 66742.3433780163,
       "composite": 32.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -956,8 +976,8 @@
       "fired_signals": []
     },
     {
-      "date": "2026-03-24",
-      "price": 70527.7404395897,
+      "date": "2026-04-04",
+      "price": 67300.0441785073,
       "composite": 32.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -965,26 +985,8 @@
       "fired_signals": []
     },
     {
-      "date": "2026-03-29",
-      "price": 65980.6531858915,
-      "composite": 32.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 6,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-04-03",
-      "price": 66954.4639577169,
-      "composite": 32.0,
-      "regime": "ACCUMULATE",
-      "cycle_count": 0,
-      "acc_count": 6,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-04-08",
-      "price": 71089.0752463362,
+      "date": "2026-04-09",
+      "price": 71797.3226310816,
       "composite": 35.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -992,19 +994,8 @@
       "fired_signals": []
     },
     {
-      "date": "2026-04-13",
-      "price": 74439.1417681227,
-      "composite": 46.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 0,
-      "acc_count": 3,
-      "fired_signals": [
-        "transfer_volume_momo"
-      ]
-    },
-    {
-      "date": "2026-04-18",
-      "price": 75730.9852333289,
+      "date": "2026-04-14",
+      "price": 74170.8260823513,
       "composite": 43.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -1014,8 +1005,19 @@
       ]
     },
     {
-      "date": "2026-04-23",
-      "price": 78282.169442851,
+      "date": "2026-04-19",
+      "price": 73834.8319428331,
+      "composite": 43.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 4,
+      "fired_signals": [
+        "transfer_volume_momo"
+      ]
+    },
+    {
+      "date": "2026-04-24",
+      "price": 77460.0457327105,
       "composite": 41.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -1023,28 +1025,28 @@
       "fired_signals": []
     },
     {
-      "date": "2026-04-28",
-      "price": 76353.0417902478,
-      "composite": 38.0,
+      "date": "2026-04-29",
+      "price": 75763.7106454231,
+      "composite": 43.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
       "acc_count": 4,
-      "fired_signals": []
-    },
-    {
-      "date": "2026-05-03",
-      "price": 78558.5857207882,
-      "composite": 46.0,
-      "regime": "NEUTRAL",
-      "cycle_count": 0,
-      "acc_count": 3,
       "fired_signals": [
         "transfer_volume_momo"
       ]
     },
     {
-      "date": "2026-05-07",
-      "price": 80011.0661804087,
+      "date": "2026-05-04",
+      "price": 79840.2788641106,
+      "composite": 41.0,
+      "regime": "ACCUMULATE",
+      "cycle_count": 0,
+      "acc_count": 3,
+      "fired_signals": []
+    },
+    {
+      "date": "2026-05-08",
+      "price": 80192.7561464176,
       "composite": 38.0,
       "regime": "ACCUMULATE",
       "cycle_count": 0,
@@ -1054,1725 +1056,1725 @@
   ],
   "supply_topography": {
     "schema": "supply_topography_v1",
-    "fetched_at": "2026-05-08T04:13:24+00:00",
-    "current_price": 79583.9355564082,
+    "fetched_at": "2026-05-09T04:13:18+00:00",
+    "current_price": 80429.2552505906,
     "ath_price": 126223.317922832,
     "live": {
       "ath_partitioned": {
         "metadata": {
-          "total_supply": 20026230.41997096,
+          "total_supply": 20026699.16997096,
           "bucket_count": 100
         },
         "features": {
-          "overhead_supply_ratio": 1.12,
-          "overhead_share_pct_supply": 17.57,
-          "support_share_pct_supply": 15.68,
-          "air_gap_above_pct": 53.85,
-          "air_gap_below_pct": 34.97,
-          "nearest_cluster_above_pct": 4.68,
-          "nearest_cluster_below_pct": 15.94,
+          "overhead_supply_ratio": 1.117,
+          "overhead_share_pct_supply": 17.42,
+          "support_share_pct_supply": 15.59,
+          "air_gap_above_pct": 52.23,
+          "air_gap_below_pct": 35.66,
+          "nearest_cluster_above_pct": 3.58,
+          "nearest_cluster_below_pct": 16.82,
           "cluster_count_above": 2,
           "cluster_count_below": 1,
           "cluster_supply_above_pct": 5.26,
           "cluster_supply_below_pct": 2.22,
           "bucket_width_usd": 1262.23,
-          "bucket_resolution_pct": 1.586
+          "bucket_resolution_pct": 1.569
         },
         "histogram": [
           {
             "price": 0.0,
-            "supply_btc": 3769637.62,
-            "share": 0.18824
+            "supply_btc": 3769550.41,
+            "share": 0.18823
           },
           {
             "price": 1262.23,
-            "supply_btc": 73739.28,
+            "supply_btc": 73738.44,
             "share": 0.00368
           },
           {
             "price": 2524.47,
-            "supply_btc": 292742.83,
+            "supply_btc": 292730.15,
             "share": 0.01462
           },
           {
             "price": 3786.7,
-            "supply_btc": 227655.62,
+            "supply_btc": 227651.16,
             "share": 0.01137
           },
           {
             "price": 5048.93,
-            "supply_btc": 143581.84,
+            "supply_btc": 143559.54,
             "share": 0.00717
           },
           {
             "price": 6311.17,
-            "supply_btc": 337154.61,
-            "share": 0.01684
+            "supply_btc": 337139.29,
+            "share": 0.01683
           },
           {
             "price": 7573.4,
-            "supply_btc": 235385.5,
+            "supply_btc": 235355.17,
             "share": 0.01175
           },
           {
             "price": 8835.63,
-            "supply_btc": 262979.37,
+            "supply_btc": 262964.13,
             "share": 0.01313
           },
           {
             "price": 10097.87,
-            "supply_btc": 180812.29,
+            "supply_btc": 180802.6,
             "share": 0.00903
           },
           {
             "price": 11360.1,
-            "supply_btc": 102619.84,
+            "supply_btc": 102615.05,
             "share": 0.00512
           },
           {
             "price": 12622.33,
-            "supply_btc": 132981.68,
+            "supply_btc": 132937.51,
             "share": 0.00664
           },
           {
             "price": 13884.56,
-            "supply_btc": 40968.34,
+            "supply_btc": 40967.45,
             "share": 0.00205
           },
           {
             "price": 15146.8,
-            "supply_btc": 62926.89,
+            "supply_btc": 62919.8,
             "share": 0.00314
           },
           {
             "price": 16409.03,
-            "supply_btc": 383515.78,
+            "supply_btc": 383414.13,
             "share": 0.01915
           },
           {
             "price": 17671.26,
-            "supply_btc": 62743.29,
+            "supply_btc": 62728.06,
             "share": 0.00313
           },
           {
             "price": 18933.5,
-            "supply_btc": 118443.76,
+            "supply_btc": 118419.85,
             "share": 0.00591
           },
           {
             "price": 20195.73,
-            "supply_btc": 219864.59,
+            "supply_btc": 219830.28,
             "share": 0.01098
           },
           {
             "price": 21457.96,
-            "supply_btc": 60088.56,
+            "supply_btc": 60056.86,
             "share": 0.003
           },
           {
             "price": 22720.2,
-            "supply_btc": 97357.52,
+            "supply_btc": 97244.61,
             "share": 0.00486
           },
           {
             "price": 23982.43,
-            "supply_btc": 56641.17,
+            "supply_btc": 56634.15,
             "share": 0.00283
           },
           {
             "price": 25244.66,
-            "supply_btc": 129538.59,
+            "supply_btc": 129525.22,
             "share": 0.00647
           },
           {
             "price": 26506.9,
-            "supply_btc": 152246.31,
+            "supply_btc": 152231.98,
             "share": 0.0076
           },
           {
             "price": 27769.13,
-            "supply_btc": 113456.69,
-            "share": 0.00567
+            "supply_btc": 113441.16,
+            "share": 0.00566
           },
           {
             "price": 29031.36,
-            "supply_btc": 141668.58,
+            "supply_btc": 141646.72,
             "share": 0.00707
           },
           {
             "price": 30293.6,
-            "supply_btc": 73097.85,
+            "supply_btc": 73083.59,
             "share": 0.00365
           },
           {
             "price": 31555.83,
-            "supply_btc": 37282.65,
+            "supply_btc": 37275.05,
             "share": 0.00186
           },
           {
             "price": 32818.06,
-            "supply_btc": 40033.67,
+            "supply_btc": 39958.18,
             "share": 0.002
           },
           {
             "price": 34080.3,
-            "supply_btc": 93955.39,
+            "supply_btc": 93949.88,
             "share": 0.00469
           },
           {
             "price": 35342.53,
-            "supply_btc": 49771.61,
-            "share": 0.00249
+            "supply_btc": 49758.02,
+            "share": 0.00248
           },
           {
             "price": 36604.76,
-            "supply_btc": 96850.76,
+            "supply_btc": 96839.3,
             "share": 0.00484
           },
           {
             "price": 37867.0,
-            "supply_btc": 208304.4,
+            "supply_btc": 208289.35,
             "share": 0.0104
           },
           {
             "price": 39129.23,
-            "supply_btc": 126337.94,
+            "supply_btc": 126335.17,
             "share": 0.00631
           },
           {
             "price": 40391.46,
-            "supply_btc": 101572.79,
+            "supply_btc": 101564.97,
             "share": 0.00507
           },
           {
             "price": 41653.69,
-            "supply_btc": 131030.67,
+            "supply_btc": 130992.47,
             "share": 0.00654
           },
           {
             "price": 42915.93,
-            "supply_btc": 108117.56,
+            "supply_btc": 108094.36,
             "share": 0.0054
           },
           {
             "price": 44178.16,
-            "supply_btc": 40154.29,
-            "share": 0.00201
+            "supply_btc": 40149.4,
+            "share": 0.002
           },
           {
             "price": 45440.39,
-            "supply_btc": 43371.52,
+            "supply_btc": 43370.2,
             "share": 0.00217
           },
           {
             "price": 46702.63,
-            "supply_btc": 116874.58,
-            "share": 0.00584
+            "supply_btc": 116853.45,
+            "share": 0.00583
           },
           {
             "price": 47964.86,
-            "supply_btc": 84804.57,
+            "supply_btc": 84798.79,
             "share": 0.00423
           },
           {
             "price": 49227.09,
-            "supply_btc": 72402.32,
-            "share": 0.00362
+            "supply_btc": 72390.62,
+            "share": 0.00361
           },
           {
             "price": 50489.33,
-            "supply_btc": 47086.4,
+            "supply_btc": 47081.54,
             "share": 0.00235
           },
           {
             "price": 51751.56,
-            "supply_btc": 30445.74,
+            "supply_btc": 30390.56,
             "share": 0.00152
           },
           {
             "price": 53013.79,
-            "supply_btc": 67010.47,
+            "supply_btc": 67008.44,
             "share": 0.00335
           },
           {
             "price": 54276.03,
-            "supply_btc": 87104.24,
+            "supply_btc": 87102.14,
             "share": 0.00435
           },
           {
             "price": 55538.26,
-            "supply_btc": 68733.39,
+            "supply_btc": 68729.12,
             "share": 0.00343
           },
           {
             "price": 56800.49,
-            "supply_btc": 94956.79,
+            "supply_btc": 94926.45,
             "share": 0.00474
           },
           {
             "price": 58062.73,
-            "supply_btc": 89386.63,
+            "supply_btc": 89369.84,
             "share": 0.00446
           },
           {
             "price": 59324.96,
-            "supply_btc": 138768.45,
+            "supply_btc": 138714.71,
             "share": 0.00693
           },
           {
             "price": 60587.19,
-            "supply_btc": 161630.25,
+            "supply_btc": 161590.52,
             "share": 0.00807
           },
           {
             "price": 61849.43,
-            "supply_btc": 200720.4,
+            "supply_btc": 200711.27,
             "share": 0.01002
           },
           {
             "price": 63111.66,
-            "supply_btc": 251617.45,
+            "supply_btc": 251582.97,
             "share": 0.01256
           },
           {
             "price": 64373.89,
-            "supply_btc": 115371.41,
-            "share": 0.00576
+            "supply_btc": 115045.11,
+            "share": 0.00574
           },
           {
             "price": 65636.13,
-            "supply_btc": 255101.35,
-            "share": 0.01274
+            "supply_btc": 254180.34,
+            "share": 0.01269
           },
           {
             "price": 66898.36,
-            "supply_btc": 444403.81,
-            "share": 0.02219
+            "supply_btc": 443723.72,
+            "share": 0.02216
           },
           {
             "price": 68160.59,
-            "supply_btc": 298282.16,
-            "share": 0.01489
+            "supply_btc": 297592.75,
+            "share": 0.01486
           },
           {
             "price": 69422.82,
-            "supply_btc": 271154.13,
-            "share": 0.01354
+            "supply_btc": 270341.31,
+            "share": 0.0135
           },
           {
             "price": 70685.06,
-            "supply_btc": 230869.63,
-            "share": 0.01153
+            "supply_btc": 228713.27,
+            "share": 0.01142
           },
           {
             "price": 71947.29,
-            "supply_btc": 97900.03,
-            "share": 0.00489
+            "supply_btc": 97669.86,
+            "share": 0.00488
           },
           {
             "price": 73209.52,
-            "supply_btc": 141449.75,
-            "share": 0.00706
+            "supply_btc": 140050.89,
+            "share": 0.00699
           },
           {
             "price": 74471.76,
-            "supply_btc": 172616.09,
-            "share": 0.00862
+            "supply_btc": 167495.17,
+            "share": 0.00836
           },
           {
             "price": 75733.99,
-            "supply_btc": 247993.7,
-            "share": 0.01238
+            "supply_btc": 230319.54,
+            "share": 0.0115
           },
           {
             "price": 76996.22,
-            "supply_btc": 232993.87,
-            "share": 0.01163
+            "supply_btc": 230106.12,
+            "share": 0.01149
           },
           {
             "price": 78258.46,
-            "supply_btc": 381137.63,
-            "share": 0.01903
+            "supply_btc": 394894.58,
+            "share": 0.01972
           },
           {
             "price": 79520.69,
-            "supply_btc": 229556.38,
-            "share": 0.01146
+            "supply_btc": 286696.88,
+            "share": 0.01432
           },
           {
             "price": 80782.92,
-            "supply_btc": 231224.66,
-            "share": 0.01155
+            "supply_btc": 204062.25,
+            "share": 0.01019
           },
           {
             "price": 82045.16,
-            "supply_btc": 121653.58,
-            "share": 0.00607
+            "supply_btc": 121279.64,
+            "share": 0.00606
           },
           {
             "price": 83307.39,
-            "supply_btc": 460103.87,
-            "share": 0.02298
+            "supply_btc": 460080.72,
+            "share": 0.02297
           },
           {
             "price": 84569.62,
-            "supply_btc": 593597.59,
+            "supply_btc": 593577.19,
             "share": 0.02964
           },
           {
             "price": 85831.86,
-            "supply_btc": 106558.56,
+            "supply_btc": 106447.73,
             "share": 0.00532
           },
           {
             "price": 87094.09,
-            "supply_btc": 369485.91,
-            "share": 0.01845
+            "supply_btc": 369084.14,
+            "share": 0.01843
           },
           {
             "price": 88356.32,
-            "supply_btc": 152554.79,
-            "share": 0.00762
+            "supply_btc": 152167.53,
+            "share": 0.0076
           },
           {
             "price": 89618.56,
-            "supply_btc": 326727.81,
-            "share": 0.01631
+            "supply_btc": 326529.72,
+            "share": 0.0163
           },
           {
             "price": 90880.79,
-            "supply_btc": 272762.31,
-            "share": 0.01362
+            "supply_btc": 272522.04,
+            "share": 0.01361
           },
           {
             "price": 92143.02,
-            "supply_btc": 286699.91,
-            "share": 0.01432
+            "supply_btc": 286612.87,
+            "share": 0.01431
           },
           {
             "price": 93405.26,
-            "supply_btc": 177244.95,
-            "share": 0.00885
+            "supply_btc": 177001.23,
+            "share": 0.00884
           },
           {
             "price": 94667.49,
-            "supply_btc": 204287.55,
-            "share": 0.0102
+            "supply_btc": 203968.8,
+            "share": 0.01018
           },
           {
             "price": 95929.72,
-            "supply_btc": 215473.12,
-            "share": 0.01076
+            "supply_btc": 214443.86,
+            "share": 0.01071
           },
           {
             "price": 97191.95,
-            "supply_btc": 143766.98,
-            "share": 0.00718
+            "supply_btc": 143669.97,
+            "share": 0.00717
           },
           {
             "price": 98454.19,
-            "supply_btc": 82987.36,
-            "share": 0.00414
+            "supply_btc": 82545.19,
+            "share": 0.00412
           },
           {
             "price": 99716.42,
-            "supply_btc": 81005.48,
+            "supply_btc": 80989.59,
             "share": 0.00404
           },
           {
             "price": 100978.65,
-            "supply_btc": 178962.74,
-            "share": 0.00894
+            "supply_btc": 178928.21,
+            "share": 0.00893
           },
           {
             "price": 102240.89,
-            "supply_btc": 131885.15,
-            "share": 0.00659
+            "supply_btc": 131865.12,
+            "share": 0.00658
           },
           {
             "price": 103503.12,
-            "supply_btc": 126201.04,
-            "share": 0.0063
+            "supply_btc": 125576.57,
+            "share": 0.00627
           },
           {
             "price": 104765.35,
-            "supply_btc": 307777.33,
-            "share": 0.01537
+            "supply_btc": 307194.8,
+            "share": 0.01534
           },
           {
             "price": 106027.59,
-            "supply_btc": 162866.94,
-            "share": 0.00813
+            "supply_btc": 162381.27,
+            "share": 0.00811
           },
           {
             "price": 107289.82,
-            "supply_btc": 221971.63,
+            "supply_btc": 221823.3,
             "share": 0.01108
           },
           {
             "price": 108552.05,
-            "supply_btc": 232320.56,
-            "share": 0.0116
+            "supply_btc": 231864.8,
+            "share": 0.01158
           },
           {
             "price": 109814.29,
-            "supply_btc": 216728.36,
-            "share": 0.01082
+            "supply_btc": 216580.28,
+            "share": 0.01081
           },
           {
             "price": 111076.52,
-            "supply_btc": 195086.15,
-            "share": 0.00974
+            "supply_btc": 194159.22,
+            "share": 0.0097
           },
           {
             "price": 112338.75,
-            "supply_btc": 203938.68,
-            "share": 0.01018
+            "supply_btc": 203525.13,
+            "share": 0.01016
           },
           {
             "price": 113600.99,
-            "supply_btc": 161433.03,
-            "share": 0.00806
+            "supply_btc": 161265.01,
+            "share": 0.00805
           },
           {
             "price": 114863.22,
-            "supply_btc": 202736.93,
-            "share": 0.01012
+            "supply_btc": 202116.49,
+            "share": 0.01009
           },
           {
             "price": 116125.45,
-            "supply_btc": 185275.44,
+            "supply_btc": 185218.57,
             "share": 0.00925
           },
           {
             "price": 117387.69,
-            "supply_btc": 191586.17,
-            "share": 0.00957
+            "supply_btc": 191491.75,
+            "share": 0.00956
           },
           {
             "price": 118649.92,
-            "supply_btc": 95904.27,
-            "share": 0.00479
+            "supply_btc": 95551.0,
+            "share": 0.00477
           },
           {
             "price": 119912.15,
-            "supply_btc": 66917.7,
+            "supply_btc": 66911.51,
             "share": 0.00334
           },
           {
             "price": 121174.39,
-            "supply_btc": 68577.7,
+            "supply_btc": 68511.14,
             "share": 0.00342
           },
           {
             "price": 122436.62,
-            "supply_btc": 43520.85,
+            "supply_btc": 43511.61,
             "share": 0.00217
           },
           {
             "price": 123698.85,
-            "supply_btc": 22094.1,
+            "supply_btc": 22091.67,
             "share": 0.0011
           },
           {
             "price": 124961.08,
-            "supply_btc": 5307.93,
-            "share": 0.00027
+            "supply_btc": 5305.65,
+            "share": 0.00026
           }
         ]
       },
       "entity_adjusted": {
         "metadata": {
-          "total_supply": 17034457.54248334,
+          "total_supply": 17029672.93221416,
           "bucket_count": 100,
-          "entity_filter_gap_btc": 2991772.88
+          "entity_filter_gap_btc": 2997026.24
         },
         "features": {
-          "overhead_supply_ratio": 1.161,
-          "overhead_share_pct_supply": 17.6,
-          "support_share_pct_supply": 15.16,
-          "air_gap_above_pct": 47.34,
-          "air_gap_below_pct": 27.11,
-          "nearest_cluster_above_pct": 0.81,
-          "nearest_cluster_below_pct": 2.29,
+          "overhead_supply_ratio": 1.321,
+          "overhead_share_pct_supply": 17.47,
+          "support_share_pct_supply": 13.23,
+          "air_gap_above_pct": 49.64,
+          "air_gap_below_pct": 25.97,
+          "nearest_cluster_above_pct": 2.38,
+          "nearest_cluster_below_pct": 11.79,
           "cluster_count_above": 2,
-          "cluster_count_below": 3,
-          "cluster_supply_above_pct": 7.6,
-          "cluster_supply_below_pct": 7.79,
+          "cluster_count_below": 2,
+          "cluster_supply_above_pct": 7.56,
+          "cluster_supply_below_pct": 5.0,
           "bucket_width_usd": 1262.23,
-          "bucket_resolution_pct": 1.551
+          "bucket_resolution_pct": 1.575
         },
         "histogram": [
           {
             "price": 0.0,
-            "supply_btc": 3772693.56,
-            "share": 0.22147
+            "supply_btc": 3772501.52,
+            "share": 0.22153
           },
           {
             "price": 1262.23,
-            "supply_btc": 84167.69,
+            "supply_btc": 84161.38,
             "share": 0.00494
           },
           {
             "price": 2524.47,
-            "supply_btc": 289464.37,
-            "share": 0.01699
+            "supply_btc": 289428.54,
+            "share": 0.017
           },
           {
             "price": 3786.7,
-            "supply_btc": 183920.0,
+            "supply_btc": 183901.51,
             "share": 0.0108
           },
           {
             "price": 5048.93,
-            "supply_btc": 143256.38,
+            "supply_btc": 143224.94,
             "share": 0.00841
           },
           {
             "price": 6311.17,
-            "supply_btc": 329638.4,
-            "share": 0.01935
+            "supply_btc": 329276.19,
+            "share": 0.01934
           },
           {
             "price": 7573.4,
-            "supply_btc": 235791.12,
+            "supply_btc": 235758.38,
             "share": 0.01384
           },
           {
             "price": 8835.63,
-            "supply_btc": 231851.56,
+            "supply_btc": 231786.16,
             "share": 0.01361
           },
           {
             "price": 10097.87,
-            "supply_btc": 156614.38,
+            "supply_btc": 156499.68,
             "share": 0.00919
           },
           {
             "price": 11360.1,
-            "supply_btc": 89496.64,
+            "supply_btc": 89455.9,
             "share": 0.00525
           },
           {
             "price": 12622.33,
-            "supply_btc": 66858.5,
-            "share": 0.00392
+            "supply_btc": 66850.3,
+            "share": 0.00393
           },
           {
             "price": 13884.56,
-            "supply_btc": 53206.83,
+            "supply_btc": 53165.07,
             "share": 0.00312
           },
           {
             "price": 15146.8,
-            "supply_btc": 55680.66,
+            "supply_btc": 55671.75,
             "share": 0.00327
           },
           {
             "price": 16409.03,
-            "supply_btc": 278479.26,
-            "share": 0.01635
+            "supply_btc": 278081.15,
+            "share": 0.01633
           },
           {
             "price": 17671.26,
-            "supply_btc": 63243.85,
+            "supply_btc": 63212.42,
             "share": 0.00371
           },
           {
             "price": 18933.5,
-            "supply_btc": 135834.61,
+            "supply_btc": 135766.91,
             "share": 0.00797
           },
           {
             "price": 20195.73,
-            "supply_btc": 111540.13,
+            "supply_btc": 111472.4,
             "share": 0.00655
           },
           {
             "price": 21457.96,
-            "supply_btc": 65159.87,
+            "supply_btc": 65149.7,
             "share": 0.00383
           },
           {
             "price": 22720.2,
-            "supply_btc": 117662.59,
-            "share": 0.00691
+            "supply_btc": 117525.91,
+            "share": 0.0069
           },
           {
             "price": 23982.43,
-            "supply_btc": 47152.72,
-            "share": 0.00277
+            "supply_btc": 46050.89,
+            "share": 0.0027
           },
           {
             "price": 25244.66,
-            "supply_btc": 115192.54,
+            "supply_btc": 115156.74,
             "share": 0.00676
           },
           {
             "price": 26506.9,
-            "supply_btc": 142185.68,
-            "share": 0.00835
+            "supply_btc": 142019.78,
+            "share": 0.00834
           },
           {
             "price": 27769.13,
-            "supply_btc": 110204.71,
-            "share": 0.00647
+            "supply_btc": 110041.88,
+            "share": 0.00646
           },
           {
             "price": 29031.36,
-            "supply_btc": 132456.07,
-            "share": 0.00778
+            "supply_btc": 132381.84,
+            "share": 0.00777
           },
           {
             "price": 30293.6,
-            "supply_btc": 75074.4,
+            "supply_btc": 75024.36,
             "share": 0.00441
           },
           {
             "price": 31555.83,
-            "supply_btc": 50320.65,
+            "supply_btc": 50291.47,
             "share": 0.00295
           },
           {
             "price": 32818.06,
-            "supply_btc": 44512.41,
+            "supply_btc": 44492.96,
             "share": 0.00261
           },
           {
             "price": 34080.3,
-            "supply_btc": 268259.7,
-            "share": 0.01575
+            "supply_btc": 267771.63,
+            "share": 0.01572
           },
           {
             "price": 35342.53,
-            "supply_btc": 176989.43,
-            "share": 0.01039
+            "supply_btc": 176766.09,
+            "share": 0.01038
           },
           {
             "price": 36604.76,
-            "supply_btc": 75558.65,
-            "share": 0.00444
+            "supply_btc": 75525.99,
+            "share": 0.00443
           },
           {
             "price": 37867.0,
-            "supply_btc": 70760.28,
+            "supply_btc": 70664.43,
             "share": 0.00415
           },
           {
             "price": 39129.23,
-            "supply_btc": 161363.15,
-            "share": 0.00947
+            "supply_btc": 161384.15,
+            "share": 0.00948
           },
           {
             "price": 40391.46,
-            "supply_btc": 69288.29,
-            "share": 0.00407
+            "supply_btc": 69181.83,
+            "share": 0.00406
           },
           {
             "price": 41653.69,
-            "supply_btc": 447991.19,
-            "share": 0.0263
+            "supply_btc": 447778.77,
+            "share": 0.02629
           },
           {
             "price": 42915.93,
-            "supply_btc": 95983.09,
+            "supply_btc": 95904.73,
             "share": 0.00563
           },
           {
             "price": 44178.16,
-            "supply_btc": 55416.65,
-            "share": 0.00325
+            "supply_btc": 55463.25,
+            "share": 0.00326
           },
           {
             "price": 45440.39,
-            "supply_btc": 66841.17,
+            "supply_btc": 66799.55,
             "share": 0.00392
           },
           {
             "price": 46702.63,
-            "supply_btc": 81404.72,
+            "supply_btc": 81372.82,
             "share": 0.00478
           },
           {
             "price": 47964.86,
-            "supply_btc": 60826.43,
+            "supply_btc": 60818.44,
             "share": 0.00357
           },
           {
             "price": 49227.09,
-            "supply_btc": 52276.42,
+            "supply_btc": 52264.16,
             "share": 0.00307
           },
           {
             "price": 50489.33,
-            "supply_btc": 54500.16,
+            "supply_btc": 54474.73,
             "share": 0.0032
           },
           {
             "price": 51751.56,
-            "supply_btc": 37369.23,
-            "share": 0.00219
+            "supply_btc": 37585.58,
+            "share": 0.00221
           },
           {
             "price": 53013.79,
-            "supply_btc": 37488.54,
+            "supply_btc": 37484.67,
             "share": 0.0022
           },
           {
             "price": 54276.03,
-            "supply_btc": 97060.94,
+            "supply_btc": 97043.75,
             "share": 0.0057
           },
           {
             "price": 55538.26,
-            "supply_btc": 41565.71,
+            "supply_btc": 41549.16,
             "share": 0.00244
           },
           {
             "price": 56800.49,
-            "supply_btc": 68556.78,
+            "supply_btc": 68505.95,
             "share": 0.00402
           },
           {
             "price": 58062.73,
-            "supply_btc": 72216.9,
-            "share": 0.00424
+            "supply_btc": 72056.32,
+            "share": 0.00423
           },
           {
             "price": 59324.96,
-            "supply_btc": 51093.61,
-            "share": 0.003
+            "supply_btc": 50986.98,
+            "share": 0.00299
           },
           {
             "price": 60587.19,
-            "supply_btc": 84445.71,
-            "share": 0.00496
+            "supply_btc": 84380.89,
+            "share": 0.00495
           },
           {
             "price": 61849.43,
-            "supply_btc": 73333.69,
-            "share": 0.00431
+            "supply_btc": 73158.97,
+            "share": 0.0043
           },
           {
             "price": 63111.66,
-            "supply_btc": 175270.53,
-            "share": 0.01029
+            "supply_btc": 174997.4,
+            "share": 0.01028
           },
           {
             "price": 64373.89,
-            "supply_btc": 83967.66,
-            "share": 0.00493
+            "supply_btc": 83753.34,
+            "share": 0.00492
           },
           {
             "price": 65636.13,
-            "supply_btc": 158752.65,
-            "share": 0.00932
+            "supply_btc": 158081.85,
+            "share": 0.00928
           },
           {
             "price": 66898.36,
-            "supply_btc": 246237.05,
-            "share": 0.01446
+            "supply_btc": 245466.77,
+            "share": 0.01441
           },
           {
             "price": 68160.59,
-            "supply_btc": 206024.21,
+            "supply_btc": 205862.15,
             "share": 0.01209
           },
           {
             "price": 69422.82,
-            "supply_btc": 190179.63,
-            "share": 0.01116
+            "supply_btc": 185619.09,
+            "share": 0.0109
           },
           {
             "price": 70685.06,
-            "supply_btc": 406217.02,
-            "share": 0.02385
+            "supply_btc": 403633.62,
+            "share": 0.0237
           },
           {
             "price": 71947.29,
-            "supply_btc": 75487.81,
-            "share": 0.00443
+            "supply_btc": 74976.56,
+            "share": 0.0044
           },
           {
             "price": 73209.52,
-            "supply_btc": 103297.96,
-            "share": 0.00606
+            "supply_btc": 96804.86,
+            "share": 0.00568
           },
           {
             "price": 74471.76,
-            "supply_btc": 175123.03,
-            "share": 0.01028
+            "supply_btc": 169935.71,
+            "share": 0.00998
           },
           {
             "price": 75733.99,
-            "supply_btc": 195152.24,
-            "share": 0.01146
+            "supply_btc": 187769.63,
+            "share": 0.01103
           },
           {
             "price": 76996.22,
-            "supply_btc": 150418.24,
-            "share": 0.00883
+            "supply_btc": 151157.55,
+            "share": 0.00888
           },
           {
             "price": 78258.46,
-            "supply_btc": 117807.77,
-            "share": 0.00692
+            "supply_btc": 114707.49,
+            "share": 0.00674
           },
           {
             "price": 79520.69,
-            "supply_btc": 473117.74,
-            "share": 0.02777
+            "supply_btc": 518021.03,
+            "share": 0.03042
           },
           {
             "price": 80782.92,
-            "supply_btc": 100889.49,
-            "share": 0.00592
+            "supply_btc": 106337.05,
+            "share": 0.00624
           },
           {
             "price": 82045.16,
-            "supply_btc": 913087.48,
-            "share": 0.0536
+            "supply_btc": 909584.95,
+            "share": 0.05341
           },
           {
             "price": 83307.39,
-            "supply_btc": 127961.41,
-            "share": 0.00751
+            "supply_btc": 127594.32,
+            "share": 0.00749
           },
           {
             "price": 84569.62,
-            "supply_btc": 381036.68,
-            "share": 0.02237
+            "supply_btc": 377872.29,
+            "share": 0.02219
           },
           {
             "price": 85831.86,
-            "supply_btc": 90507.28,
-            "share": 0.00531
+            "supply_btc": 90024.65,
+            "share": 0.00529
           },
           {
             "price": 87094.09,
-            "supply_btc": 190310.2,
-            "share": 0.01117
+            "supply_btc": 192583.43,
+            "share": 0.01131
           },
           {
             "price": 88356.32,
-            "supply_btc": 158709.33,
-            "share": 0.00932
+            "supply_btc": 154953.34,
+            "share": 0.0091
           },
           {
             "price": 89618.56,
-            "supply_btc": 208842.42,
-            "share": 0.01226
+            "supply_btc": 207525.64,
+            "share": 0.01219
           },
           {
             "price": 90880.79,
-            "supply_btc": 178016.36,
-            "share": 0.01045
+            "supply_btc": 177573.77,
+            "share": 0.01043
           },
           {
             "price": 92143.02,
-            "supply_btc": 171076.39,
-            "share": 0.01004
+            "supply_btc": 170276.69,
+            "share": 0.01
           },
           {
             "price": 93405.26,
-            "supply_btc": 148968.43,
-            "share": 0.00875
+            "supply_btc": 148252.69,
+            "share": 0.00871
           },
           {
             "price": 94667.49,
-            "supply_btc": 174160.47,
-            "share": 0.01022
+            "supply_btc": 172448.16,
+            "share": 0.01013
           },
           {
             "price": 95929.72,
-            "supply_btc": 140368.88,
+            "supply_btc": 140239.66,
             "share": 0.00824
           },
           {
             "price": 97191.95,
-            "supply_btc": 115512.78,
+            "supply_btc": 115435.48,
             "share": 0.00678
           },
           {
             "price": 98454.19,
-            "supply_btc": 84358.14,
-            "share": 0.00495
+            "supply_btc": 83859.07,
+            "share": 0.00492
           },
           {
             "price": 99716.42,
-            "supply_btc": 59608.47,
+            "supply_btc": 59551.64,
             "share": 0.0035
           },
           {
             "price": 100978.65,
-            "supply_btc": 106103.46,
-            "share": 0.00623
+            "supply_btc": 105975.91,
+            "share": 0.00622
           },
           {
             "price": 102240.89,
-            "supply_btc": 79379.47,
-            "share": 0.00466
+            "supply_btc": 78312.76,
+            "share": 0.0046
           },
           {
             "price": 103503.12,
-            "supply_btc": 96629.0,
-            "share": 0.00567
+            "supply_btc": 95808.96,
+            "share": 0.00563
           },
           {
             "price": 104765.35,
-            "supply_btc": 113079.76,
-            "share": 0.00664
+            "supply_btc": 114326.27,
+            "share": 0.00671
           },
           {
             "price": 106027.59,
-            "supply_btc": 103713.9,
-            "share": 0.00609
+            "supply_btc": 102417.89,
+            "share": 0.00601
           },
           {
             "price": 107289.82,
-            "supply_btc": 155461.23,
-            "share": 0.00913
+            "supply_btc": 155267.71,
+            "share": 0.00912
           },
           {
             "price": 108552.05,
-            "supply_btc": 130936.64,
-            "share": 0.00769
+            "supply_btc": 130807.25,
+            "share": 0.00768
           },
           {
             "price": 109814.29,
-            "supply_btc": 70269.06,
-            "share": 0.00413
+            "supply_btc": 70076.21,
+            "share": 0.00411
           },
           {
             "price": 111076.52,
-            "supply_btc": 96447.26,
+            "supply_btc": 96349.41,
             "share": 0.00566
           },
           {
             "price": 112338.75,
-            "supply_btc": 80424.75,
-            "share": 0.00472
+            "supply_btc": 79954.13,
+            "share": 0.00469
           },
           {
             "price": 113600.99,
-            "supply_btc": 81676.47,
+            "supply_btc": 81540.22,
             "share": 0.00479
           },
           {
             "price": 114863.22,
-            "supply_btc": 100232.71,
+            "supply_btc": 100188.63,
             "share": 0.00588
           },
           {
             "price": 116125.45,
-            "supply_btc": 78816.68,
-            "share": 0.00463
+            "supply_btc": 78645.84,
+            "share": 0.00462
           },
           {
             "price": 117387.69,
-            "supply_btc": 116288.14,
-            "share": 0.00683
+            "supply_btc": 116149.44,
+            "share": 0.00682
           },
           {
             "price": 118649.92,
-            "supply_btc": 55966.28,
-            "share": 0.00329
+            "supply_btc": 55479.67,
+            "share": 0.00326
           },
           {
             "price": 119912.15,
-            "supply_btc": 27232.9,
+            "supply_btc": 27222.18,
             "share": 0.0016
           },
           {
             "price": 121174.39,
-            "supply_btc": 28183.58,
+            "supply_btc": 28160.0,
             "share": 0.00165
           },
           {
             "price": 122436.62,
-            "supply_btc": 19731.31,
+            "supply_btc": 19673.74,
             "share": 0.00116
           },
           {
             "price": 123698.85,
-            "supply_btc": 8110.86,
+            "supply_btc": 8105.96,
             "share": 0.00048
           },
           {
             "price": 124961.08,
-            "supply_btc": 3056.3,
+            "supply_btc": 3038.31,
             "share": 0.00018
           }
         ]
       },
-      "raw_vs_ea_divergence_pct": 18.356
+      "raw_vs_ea_divergence_pct": 18.289
     },
     "migration": {
       "lookback_days": 90,
       "velocity": {
         "lookback_days": 90,
-        "velocity_pct_supply": 30.644,
-        "near_price_inflow_share": 0.09546,
-        "near_price_outflow_share": -0.0049,
-        "near_price_net_share": 0.09056,
+        "velocity_pct_supply": 30.477,
+        "near_price_inflow_share": 0.10344,
+        "near_price_outflow_share": -0.00688,
+        "near_price_net_share": 0.09656,
         "top_inflows": [
           {
-            "bucket_idx": 53,
-            "delta_pct_supply": 4.13,
-            "label": "$84.4k-$86.0k (+6%..+8%)"
+            "bucket_idx": 52,
+            "delta_pct_supply": 4.476,
+            "label": "$83.6k-$85.3k (+4%..+6%)"
           },
           {
-            "bucket_idx": 42,
-            "delta_pct_supply": 2.075,
-            "label": "$66.9k-$68.4k (-16%..-14%)"
+            "bucket_idx": 56,
+            "delta_pct_supply": 1.841,
+            "label": "$90.1k-$91.7k (+12%..+14%)"
           },
           {
             "bucket_idx": 10,
-            "delta_pct_supply": 1.809,
-            "label": "$15.9k-$17.5k (-80%..-78%)"
+            "delta_pct_supply": 1.792,
+            "label": "$16.1k-$17.7k (-80%..-78%)"
           },
           {
-            "bucket_idx": 58,
-            "delta_pct_supply": 1.459,
-            "label": "$92.3k-$93.9k (+16%..+18%)"
+            "bucket_idx": 41,
+            "delta_pct_supply": 1.608,
+            "label": "$66.0k-$67.6k (-18%..-16%)"
           },
           {
-            "bucket_idx": 57,
-            "delta_pct_supply": 1.451,
-            "label": "$90.7k-$92.3k (+14%..+16%)"
+            "bucket_idx": 54,
+            "delta_pct_supply": 1.596,
+            "label": "$86.9k-$88.5k (+8%..+10%)"
           }
         ],
         "top_outflows": [
           {
-            "bucket_idx": 61,
-            "delta_pct_supply": -2.871,
-            "label": "$97.1k-$98.7k (+22%..+24%)"
+            "bucket_idx": 60,
+            "delta_pct_supply": -2.417,
+            "label": "$96.5k-$98.1k (+20%..+22%)"
           },
           {
-            "bucket_idx": 64,
-            "delta_pct_supply": -1.94,
-            "label": "$101.9k-$103.5k (+28%..+30%)"
+            "bucket_idx": 62,
+            "delta_pct_supply": -1.931,
+            "label": "$99.7k-$101.3k (+24%..+26%)"
           },
           {
             "bucket_idx": 63,
-            "delta_pct_supply": -1.629,
-            "label": "$100.3k-$101.9k (+26%..+28%)"
+            "delta_pct_supply": -1.801,
+            "label": "$101.3k-$102.9k (+26%..+28%)"
           },
           {
-            "bucket_idx": 79,
-            "delta_pct_supply": -1.434,
-            "label": "$125.7k-$127.3k (+58%..+60%)"
+            "bucket_idx": 64,
+            "delta_pct_supply": -1.507,
+            "label": "$102.9k-$104.6k (+28%..+30%)"
           },
           {
-            "bucket_idx": 65,
-            "delta_pct_supply": -1.433,
-            "label": "$103.5k-$105.1k (+30%..+32%)"
+            "bucket_idx": 77,
+            "delta_pct_supply": -1.429,
+            "label": "$123.9k-$125.5k (+54%..+56%)"
           }
         ]
       },
       "histogram": [
         {
           "price": 0.0,
-          "share_today": 0.18904,
-          "share_prior": 0.18984,
-          "delta": -0.000795
+          "share_today": 0.18905,
+          "share_prior": 0.18983,
+          "delta": -0.000782
         },
         {
-          "price": 1591.68,
-          "share_today": 0.00975,
-          "share_prior": 0.00871,
-          "delta": 0.001042
+          "price": 1608.59,
+          "share_today": 0.0098,
+          "share_prior": 0.00952,
+          "delta": 0.000286
         },
         {
-          "price": 3183.36,
-          "share_today": 0.01859,
-          "share_prior": 0.01608,
-          "delta": 0.002514
+          "price": 3217.17,
+          "share_today": 0.01864,
+          "share_prior": 0.01593,
+          "delta": 0.002711
         },
         {
-          "price": 4775.04,
-          "share_today": 0.00864,
-          "share_prior": 0.0069,
-          "delta": 0.001731
+          "price": 4825.76,
+          "share_today": 0.0095,
+          "share_prior": 0.00708,
+          "delta": 0.00242
         },
         {
-          "price": 6366.71,
-          "share_today": 0.01803,
-          "share_prior": 0.0139,
-          "delta": 0.004126
+          "price": 6434.34,
+          "share_today": 0.01781,
+          "share_prior": 0.01364,
+          "delta": 0.004169
         },
         {
-          "price": 7958.39,
-          "share_today": 0.01723,
-          "share_prior": 0.0152,
-          "delta": 0.002032
+          "price": 8042.93,
+          "share_today": 0.01745,
+          "share_prior": 0.01622,
+          "delta": 0.001225
         },
         {
-          "price": 9550.07,
-          "share_today": 0.01318,
-          "share_prior": 0.01499,
-          "delta": -0.001804
+          "price": 9651.51,
+          "share_today": 0.01269,
+          "share_prior": 0.01494,
+          "delta": -0.00224
         },
         {
-          "price": 11141.75,
-          "share_today": 0.00661,
-          "share_prior": 0.01189,
-          "delta": -0.005284
+          "price": 11260.1,
+          "share_today": 0.0065,
+          "share_prior": 0.01101,
+          "delta": -0.004513
         },
         {
-          "price": 12733.43,
-          "share_today": 0.00735,
-          "share_prior": 0.0068,
-          "delta": 0.000552
+          "price": 12868.68,
+          "share_today": 0.00713,
+          "share_prior": 0.00623,
+          "delta": 0.000899
         },
         {
-          "price": 14325.11,
-          "share_today": 0.00277,
-          "share_prior": 0.00676,
-          "delta": -0.003988
+          "price": 14477.27,
+          "share_today": 0.00308,
+          "share_prior": 0.00701,
+          "delta": -0.003937
         },
         {
-          "price": 15916.79,
-          "share_today": 0.02043,
-          "share_prior": 0.00235,
-          "delta": 0.018086
+          "price": 16085.85,
+          "share_today": 0.02034,
+          "share_prior": 0.00243,
+          "delta": 0.017917
         },
         {
-          "price": 17508.47,
-          "share_today": 0.00407,
-          "share_prior": 0.0094,
-          "delta": -0.00533
+          "price": 17694.44,
+          "share_today": 0.00534,
+          "share_prior": 0.01801,
+          "delta": -0.012667
         },
         {
-          "price": 19100.14,
-          "share_today": 0.00755,
-          "share_prior": 0.01443,
-          "delta": -0.006879
+          "price": 19303.02,
+          "share_today": 0.00974,
+          "share_prior": 0.00588,
+          "delta": 0.003863
         },
         {
-          "price": 20691.82,
-          "share_today": 0.01064,
-          "share_prior": 0.00524,
-          "delta": 0.005399
+          "price": 20911.61,
+          "share_today": 0.00742,
+          "share_prior": 0.00604,
+          "delta": 0.001371
         },
         {
-          "price": 22283.5,
-          "share_today": 0.00571,
-          "share_prior": 0.00737,
-          "delta": -0.001658
+          "price": 22520.19,
+          "share_today": 0.00595,
+          "share_prior": 0.00969,
+          "delta": -0.003747
         },
         {
-          "price": 23875.18,
-          "share_today": 0.00312,
-          "share_prior": 0.00906,
-          "delta": -0.005942
+          "price": 24128.78,
+          "share_today": 0.00278,
+          "share_prior": 0.00627,
+          "delta": -0.003494
         },
         {
-          "price": 25466.86,
-          "share_today": 0.01019,
-          "share_prior": 0.00522,
-          "delta": 0.004971
+          "price": 25737.36,
+          "share_today": 0.01126,
+          "share_prior": 0.00536,
+          "delta": 0.005896
         },
         {
-          "price": 27058.54,
-          "share_today": 0.00838,
+          "price": 27345.95,
+          "share_today": 0.00759,
           "share_prior": 0.00308,
-          "delta": 0.005301
+          "delta": 0.004507
         },
         {
-          "price": 28650.22,
-          "share_today": 0.0078,
-          "share_prior": 0.0057,
-          "delta": 0.002104
+          "price": 28954.53,
+          "share_today": 0.0089,
+          "share_prior": 0.00833,
+          "delta": 0.000578
         },
         {
-          "price": 30241.9,
-          "share_today": 0.00459,
-          "share_prior": 0.01209,
-          "delta": -0.007503
+          "price": 30563.12,
+          "share_today": 0.00304,
+          "share_prior": 0.0115,
+          "delta": -0.008454
         },
         {
-          "price": 31833.57,
-          "share_today": 0.00202,
-          "share_prior": 0.00649,
-          "delta": -0.00447
+          "price": 32171.7,
+          "share_today": 0.00227,
+          "share_prior": 0.00646,
+          "delta": -0.00419
         },
         {
-          "price": 33425.25,
-          "share_today": 0.0055,
-          "share_prior": 0.00848,
-          "delta": -0.002977
+          "price": 33780.29,
+          "share_today": 0.00538,
+          "share_prior": 0.00709,
+          "delta": -0.001705
         },
         {
-          "price": 35016.93,
-          "share_today": 0.00295,
-          "share_prior": 0.00321,
-          "delta": -0.000261
+          "price": 35388.87,
+          "share_today": 0.00349,
+          "share_prior": 0.00213,
+          "delta": 0.001359
         },
         {
-          "price": 36608.61,
-          "share_today": 0.00587,
+          "price": 36997.46,
+          "share_today": 0.01239,
+          "share_prior": 0.0021,
+          "delta": 0.010289
+        },
+        {
+          "price": 38606.04,
+          "share_today": 0.00782,
+          "share_prior": 0.00529,
+          "delta": 0.002535
+        },
+        {
+          "price": 40214.63,
+          "share_today": 0.00705,
+          "share_prior": 0.00301,
+          "delta": 0.004041
+        },
+        {
+          "price": 41823.21,
+          "share_today": 0.00686,
+          "share_prior": 0.00572,
+          "delta": 0.001149
+        },
+        {
+          "price": 43431.8,
+          "share_today": 0.00484,
+          "share_prior": 0.01248,
+          "delta": -0.007645
+        },
+        {
+          "price": 45040.38,
+          "share_today": 0.00259,
+          "share_prior": 0.00614,
+          "delta": -0.003545
+        },
+        {
+          "price": 46648.97,
+          "share_today": 0.00779,
+          "share_prior": 0.00638,
+          "delta": 0.001406
+        },
+        {
+          "price": 48257.55,
+          "share_today": 0.00383,
+          "share_prior": 0.00646,
+          "delta": -0.002632
+        },
+        {
+          "price": 49866.14,
+          "share_today": 0.00378,
+          "share_prior": 0.00456,
+          "delta": -0.000779
+        },
+        {
+          "price": 51474.72,
+          "share_today": 0.00228,
+          "share_prior": 0.00225,
+          "delta": 3.1e-05
+        },
+        {
+          "price": 53083.31,
+          "share_today": 0.00551,
+          "share_prior": 0.00545,
+          "delta": 5.6e-05
+        },
+        {
+          "price": 54691.89,
+          "share_today": 0.00334,
+          "share_prior": 0.00548,
+          "delta": -0.002138
+        },
+        {
+          "price": 56300.48,
+          "share_today": 0.00655,
+          "share_prior": 0.00388,
+          "delta": 0.002676
+        },
+        {
+          "price": 57909.06,
+          "share_today": 0.00534,
+          "share_prior": 0.00292,
+          "delta": 0.002413
+        },
+        {
+          "price": 59517.65,
+          "share_today": 0.01035,
+          "share_prior": 0.00114,
+          "delta": 0.009209
+        },
+        {
+          "price": 61126.23,
+          "share_today": 0.01218,
+          "share_prior": 0.00595,
+          "delta": 0.00623
+        },
+        {
+          "price": 62734.82,
+          "share_today": 0.01403,
+          "share_prior": 0.00291,
+          "delta": 0.011115
+        },
+        {
+          "price": 64343.4,
+          "share_today": 0.00893,
+          "share_prior": 0.00603,
+          "delta": 0.002903
+        },
+        {
+          "price": 65951.99,
+          "share_today": 0.02102,
+          "share_prior": 0.00494,
+          "delta": 0.016083
+        },
+        {
+          "price": 67560.57,
+          "share_today": 0.0228,
+          "share_prior": 0.00815,
+          "delta": 0.014653
+        },
+        {
+          "price": 69169.16,
+          "share_today": 0.01753,
+          "share_prior": 0.00945,
+          "delta": 0.008087
+        },
+        {
+          "price": 70777.74,
+          "share_today": 0.01237,
+          "share_prior": 0.01178,
+          "delta": 0.000584
+        },
+        {
+          "price": 72386.33,
+          "share_today": 0.00648,
+          "share_prior": 0.01336,
+          "delta": -0.006878
+        },
+        {
+          "price": 73994.91,
+          "share_today": 0.01133,
+          "share_prior": 0.00793,
+          "delta": 0.003401
+        },
+        {
+          "price": 75603.5,
+          "share_today": 0.01399,
+          "share_prior": 0.01146,
+          "delta": 0.002525
+        },
+        {
+          "price": 77212.09,
+          "share_today": 0.02492,
+          "share_prior": 0.00988,
+          "delta": 0.015045
+        },
+        {
+          "price": 78820.67,
+          "share_today": 0.0155,
+          "share_prior": 0.01221,
+          "delta": 0.003287
+        },
+        {
+          "price": 80429.26,
+          "share_today": 0.01352,
+          "share_prior": 0.01225,
+          "delta": 0.00127
+        },
+        {
+          "price": 82037.84,
+          "share_today": 0.00796,
+          "share_prior": 0.00269,
+          "delta": 0.005275
+        },
+        {
+          "price": 83646.43,
+          "share_today": 0.04655,
           "share_prior": 0.00179,
-          "delta": 0.004086
+          "delta": 0.044755
         },
         {
-          "price": 38200.29,
-          "share_today": 0.01313,
-          "share_prior": 0.00464,
-          "delta": 0.008492
+          "price": 85255.01,
+          "share_today": 0.00729,
+          "share_prior": 0.0024,
+          "delta": 0.004887
         },
         {
-          "price": 39791.97,
-          "share_today": 0.00587,
-          "share_prior": 0.00298,
-          "delta": 0.002891
+          "price": 86863.6,
+          "share_today": 0.02134,
+          "share_prior": 0.00538,
+          "delta": 0.015956
         },
         {
-          "price": 41383.65,
-          "share_today": 0.00859,
-          "share_prior": 0.00453,
-          "delta": 0.004054
+          "price": 88472.18,
+          "share_today": 0.01125,
+          "share_prior": 0.00421,
+          "delta": 0.007041
         },
         {
-          "price": 42975.33,
-          "share_today": 0.00587,
-          "share_prior": 0.01168,
-          "delta": -0.005812
+          "price": 90080.77,
+          "share_today": 0.02103,
+          "share_prior": 0.00262,
+          "delta": 0.018409
         },
         {
-          "price": 44567.0,
-          "share_today": 0.00225,
-          "share_prior": 0.00621,
-          "delta": -0.003957
+          "price": 91689.35,
+          "share_today": 0.01726,
+          "share_prior": 0.00138,
+          "delta": 0.015884
         },
         {
-          "price": 46158.68,
-          "share_today": 0.00569,
-          "share_prior": 0.00587,
-          "delta": -0.000186
+          "price": 93297.94,
+          "share_today": 0.01187,
+          "share_prior": 0.00772,
+          "delta": 0.004154
         },
         {
-          "price": 47750.36,
-          "share_today": 0.00581,
-          "share_prior": 0.00775,
-          "delta": -0.00194
+          "price": 94906.52,
+          "share_today": 0.01198,
+          "share_prior": 0.01997,
+          "delta": -0.007998
         },
         {
-          "price": 49342.04,
-          "share_today": 0.00398,
-          "share_prior": 0.0062,
-          "delta": -0.002222
+          "price": 96515.11,
+          "share_today": 0.01331,
+          "share_prior": 0.03748,
+          "delta": -0.024166
         },
         {
-          "price": 50933.72,
-          "share_today": 0.00294,
-          "share_prior": 0.00194,
-          "delta": 0.001001
+          "price": 98123.69,
+          "share_today": 0.00546,
+          "share_prior": 0.00901,
+          "delta": -0.003548
         },
         {
-          "price": 52525.4,
-          "share_today": 0.00299,
-          "share_prior": 0.00328,
-          "delta": -0.00029
+          "price": 99732.28,
+          "share_today": 0.00644,
+          "share_prior": 0.02575,
+          "delta": -0.019311
         },
         {
-          "price": 54117.08,
-          "share_today": 0.00521,
-          "share_prior": 0.00712,
-          "delta": -0.001911
+          "price": 101340.86,
+          "share_today": 0.00974,
+          "share_prior": 0.02775,
+          "delta": -0.01801
         },
         {
-          "price": 55708.75,
-          "share_today": 0.00554,
-          "share_prior": 0.00343,
-          "delta": 0.002109
+          "price": 102949.45,
+          "share_today": 0.00851,
+          "share_prior": 0.02358,
+          "delta": -0.015069
         },
         {
-          "price": 57300.43,
-          "share_today": 0.00464,
-          "share_prior": 0.00355,
-          "delta": 0.001086
+          "price": 104558.03,
+          "share_today": 0.01729,
+          "share_prior": 0.02027,
+          "delta": -0.002974
         },
         {
-          "price": 58892.11,
-          "share_today": 0.00872,
-          "share_prior": 0.00249,
-          "delta": 0.006225
+          "price": 106166.62,
+          "share_today": 0.01087,
+          "share_prior": 0.01309,
+          "delta": -0.002221
         },
         {
-          "price": 60483.79,
-          "share_today": 0.00958,
-          "share_prior": 0.00276,
-          "delta": 0.006821
+          "price": 107775.2,
+          "share_today": 0.01402,
+          "share_prior": 0.0156,
+          "delta": -0.001582
         },
         {
-          "price": 62075.47,
-          "share_today": 0.01169,
-          "share_prior": 0.00482,
-          "delta": 0.006869
+          "price": 109383.79,
+          "share_today": 0.01492,
+          "share_prior": 0.01382,
+          "delta": 0.001095
         },
         {
-          "price": 63667.15,
-          "share_today": 0.01381,
-          "share_prior": 0.00408,
-          "delta": 0.009735
+          "price": 110992.37,
+          "share_today": 0.01428,
+          "share_prior": 0.0085,
+          "delta": 0.005779
         },
         {
-          "price": 65258.83,
-          "share_today": 0.01398,
-          "share_prior": 0.0054,
-          "delta": 0.008574
+          "price": 112600.96,
+          "share_today": 0.01103,
+          "share_prior": 0.00528,
+          "delta": 0.005747
         },
         {
-          "price": 66850.51,
-          "share_today": 0.02588,
-          "share_prior": 0.00513,
-          "delta": 0.020747
+          "price": 114209.54,
+          "share_today": 0.01156,
+          "share_prior": 0.00483,
+          "delta": 0.006729
         },
         {
-          "price": 68442.18,
-          "share_today": 0.01755,
-          "share_prior": 0.00923,
-          "delta": 0.008324
+          "price": 115818.13,
+          "share_today": 0.0118,
+          "share_prior": 0.01088,
+          "delta": 0.000917
         },
         {
-          "price": 70033.86,
-          "share_today": 0.018,
-          "share_prior": 0.01327,
-          "delta": 0.004724
+          "price": 117426.71,
+          "share_today": 0.01137,
+          "share_prior": 0.00941,
+          "delta": 0.001955
         },
         {
-          "price": 71625.54,
-          "share_today": 0.00617,
-          "share_prior": 0.00736,
-          "delta": -0.001196
+          "price": 119035.3,
+          "share_today": 0.0049,
+          "share_prior": 0.01069,
+          "delta": -0.005792
         },
         {
-          "price": 73217.22,
-          "share_today": 0.01037,
-          "share_prior": 0.01407,
-          "delta": -0.003706
+          "price": 120643.88,
+          "share_today": 0.00416,
+          "share_prior": 0.01698,
+          "delta": -0.012817
         },
         {
-          "price": 74808.9,
-          "share_today": 0.01401,
-          "share_prior": 0.00891,
-          "delta": 0.005106
+          "price": 122252.47,
+          "share_today": 0.00247,
+          "share_prior": 0.01221,
+          "delta": -0.009732
         },
         {
-          "price": 76400.58,
-          "share_today": 0.01333,
-          "share_prior": 0.01202,
-          "delta": 0.001306
+          "price": 123861.05,
+          "share_today": 0.00121,
+          "share_prior": 0.0155,
+          "delta": -0.014291
         },
         {
-          "price": 77992.26,
-          "share_today": 0.02145,
-          "share_prior": 0.00998,
-          "delta": 0.011468
+          "price": 125469.64,
+          "share_today": 4e-05,
+          "share_prior": 0.01424,
+          "delta": -0.014203
         },
         {
-          "price": 79583.94,
-          "share_today": 0.01516,
-          "share_prior": 0.01308,
-          "delta": 0.002083
-        },
-        {
-          "price": 81175.61,
-          "share_today": 0.01065,
-          "share_prior": 0.00618,
-          "delta": 0.004477
-        },
-        {
-          "price": 82767.29,
-          "share_today": 0.01304,
-          "share_prior": 0.00304,
-          "delta": 0.009998
-        },
-        {
-          "price": 84358.97,
-          "share_today": 0.04269,
-          "share_prior": 0.00139,
-          "delta": 0.041304
-        },
-        {
-          "price": 85950.65,
-          "share_today": 0.01158,
-          "share_prior": 0.00257,
-          "delta": 0.009017
-        },
-        {
-          "price": 87542.33,
-          "share_today": 0.01597,
-          "share_prior": 0.00527,
-          "delta": 0.0107
-        },
-        {
-          "price": 89134.01,
-          "share_today": 0.01894,
-          "share_prior": 0.00476,
-          "delta": 0.014184
-        },
-        {
-          "price": 90725.69,
-          "share_today": 0.0165,
-          "share_prior": 0.00198,
-          "delta": 0.014512
-        },
-        {
-          "price": 92317.37,
-          "share_today": 0.01617,
-          "share_prior": 0.00158,
-          "delta": 0.014589
-        },
-        {
-          "price": 93909.04,
-          "share_today": 0.01315,
-          "share_prior": 0.00783,
-          "delta": 0.005319
-        },
-        {
-          "price": 95500.72,
-          "share_today": 0.01242,
-          "share_prior": 0.02025,
-          "delta": -0.007828
-        },
-        {
-          "price": 97092.4,
-          "share_today": 0.00831,
-          "share_prior": 0.03702,
-          "delta": -0.028713
-        },
-        {
-          "price": 98684.08,
-          "share_today": 0.00575,
-          "share_prior": 0.00993,
-          "delta": -0.004177
-        },
-        {
-          "price": 100275.76,
-          "share_today": 0.00879,
-          "share_prior": 0.02508,
-          "delta": -0.016293
-        },
-        {
-          "price": 101867.44,
-          "share_today": 0.00825,
-          "share_prior": 0.02765,
-          "delta": -0.019396
-        },
-        {
-          "price": 103459.12,
-          "share_today": 0.00913,
-          "share_prior": 0.02346,
-          "delta": -0.014327
-        },
-        {
-          "price": 105050.79,
-          "share_today": 0.01615,
-          "share_prior": 0.02024,
-          "delta": -0.004086
-        },
-        {
-          "price": 106642.47,
-          "share_today": 0.01243,
-          "share_prior": 0.01279,
-          "delta": -0.000356
-        },
-        {
-          "price": 108234.15,
-          "share_today": 0.01504,
-          "share_prior": 0.01565,
-          "delta": -0.000608
-        },
-        {
-          "price": 109825.83,
-          "share_today": 0.01394,
-          "share_prior": 0.01167,
-          "delta": 0.002279
-        },
-        {
-          "price": 111417.51,
-          "share_today": 0.01273,
-          "share_prior": 0.0107,
-          "delta": 0.00203
-        },
-        {
-          "price": 113009.19,
-          "share_today": 0.01144,
-          "share_prior": 0.00516,
-          "delta": 0.006275
-        },
-        {
-          "price": 114600.87,
-          "share_today": 0.01095,
-          "share_prior": 0.0048,
-          "delta": 0.006143
-        },
-        {
-          "price": 116192.55,
-          "share_today": 0.0127,
-          "share_prior": 0.01096,
-          "delta": 0.001737
-        },
-        {
-          "price": 117784.22,
-          "share_today": 0.00925,
-          "share_prior": 0.00893,
-          "delta": 0.000318
-        },
-        {
-          "price": 119375.9,
-          "share_today": 0.00427,
-          "share_prior": 0.0099,
-          "delta": -0.005625
-        },
-        {
-          "price": 120967.58,
-          "share_today": 0.00427,
-          "share_prior": 0.01651,
-          "delta": -0.012235
-        },
-        {
-          "price": 122559.26,
-          "share_today": 0.00226,
-          "share_prior": 0.01247,
-          "delta": -0.010204
-        },
-        {
-          "price": 124150.94,
-          "share_today": 0.00101,
-          "share_prior": 0.01355,
-          "delta": -0.012543
-        },
-        {
-          "price": 125742.62,
-          "share_today": 1e-05,
-          "share_prior": 0.01434,
-          "delta": -0.014336
-        },
-        {
-          "price": 127334.3,
+          "price": 127078.22,
           "share_today": 0.0,
-          "share_prior": 0.01393,
-          "delta": -0.01393
+          "share_prior": 0.0137,
+          "delta": -0.013696
         },
         {
-          "price": 128925.98,
+          "price": 128686.81,
           "share_today": 0.0,
-          "share_prior": 0.01295,
-          "delta": -0.01295
+          "share_prior": 0.01185,
+          "delta": -0.011851
         },
         {
-          "price": 130517.65,
+          "price": 130295.39,
           "share_today": 0.0,
-          "share_prior": 0.01038,
-          "delta": -0.010377
+          "share_prior": 0.01211,
+          "delta": -0.012108
         },
         {
-          "price": 132109.33,
+          "price": 131903.98,
           "share_today": 0.0,
-          "share_prior": 0.01143,
-          "delta": -0.011427
+          "share_prior": 0.01117,
+          "delta": -0.011168
         },
         {
-          "price": 133701.01,
+          "price": 133512.56,
           "share_today": 0.0,
-          "share_prior": 0.01294,
-          "delta": -0.01294
+          "share_prior": 0.0133,
+          "delta": -0.0133
         },
         {
-          "price": 135292.69,
+          "price": 135121.15,
           "share_today": 0.0,
-          "share_prior": 0.01068,
-          "delta": -0.010679
+          "share_prior": 0.00778,
+          "delta": -0.007777
         },
         {
-          "price": 136884.37,
+          "price": 136729.73,
           "share_today": 0.0,
-          "share_prior": 0.00524,
-          "delta": -0.00524
+          "share_prior": 0.00434,
+          "delta": -0.00434
         },
         {
-          "price": 138476.05,
+          "price": 138338.32,
           "share_today": 0.0,
-          "share_prior": 0.00379,
-          "delta": -0.00379
+          "share_prior": 0.00509,
+          "delta": -0.005094
         },
         {
-          "price": 140067.73,
+          "price": 139946.9,
           "share_today": 0.0,
-          "share_prior": 0.00373,
-          "delta": -0.003734
+          "share_prior": 0.00271,
+          "delta": -0.002707
         },
         {
-          "price": 141659.41,
+          "price": 141555.49,
           "share_today": 0.0,
-          "share_prior": 0.00155,
-          "delta": -0.001548
+          "share_prior": 0.00146,
+          "delta": -0.001463
         },
         {
-          "price": 143251.08,
+          "price": 143164.07,
           "share_today": 0.0,
-          "share_prior": 0.00098,
-          "delta": -0.000985
+          "share_prior": 0.00021,
+          "delta": -0.000206
         },
         {
-          "price": 144842.76,
+          "price": 144772.66,
           "share_today": 0.0,
           "share_prior": 0.0,
           "delta": 0.0
         },
         {
-          "price": 146434.44,
+          "price": 146381.24,
           "share_today": 0.0,
           "share_prior": 0.0,
           "delta": 0.0
         },
         {
-          "price": 148026.12,
+          "price": 147989.83,
           "share_today": 0.0,
           "share_prior": 0.0,
           "delta": 0.0
         },
         {
-          "price": 149617.8,
+          "price": 149598.41,
           "share_today": 0.0,
           "share_prior": 0.0,
           "delta": 0.0
         },
         {
-          "price": 151209.48,
+          "price": 151207.0,
           "share_today": 0.0,
           "share_prior": 0.0,
           "delta": 0.0
         },
         {
-          "price": 152801.16,
+          "price": 152815.58,
           "share_today": 0.0,
           "share_prior": 0.0,
           "delta": 0.0
         },
         {
-          "price": 154392.83,
+          "price": 154424.17,
           "share_today": 0.0,
           "share_prior": 0.0,
           "delta": 0.0
         },
         {
-          "price": 155984.51,
+          "price": 156032.76,
           "share_today": 0.0,
           "share_prior": 0.0,
           "delta": 0.0
         },
         {
-          "price": 157576.19,
+          "price": 157641.34,
           "share_today": 0.0,
           "share_prior": 0.0,
           "delta": 0.0
         },
         {
-          "price": 159167.87,
+          "price": 159249.93,
+          "share_today": 0.0,
+          "share_prior": 0.0,
+          "delta": 0.0
+        },
+        {
+          "price": 160858.51,
           "share_today": 0.0,
           "share_prior": 0.0,
           "delta": 0.0
@@ -2787,42 +2789,42 @@
           "label": "2017 cycle top (~$19k)",
           "kind": "top",
           "anchor_price": 19248.898906118284,
-          "similarity": 0.8335
+          "similarity": 0.8283
         },
         {
           "anchor_date": "2018-12-15",
           "label": "2018 cycle bottom (~$3.2k)",
           "kind": "bottom",
           "anchor_price": 3233.38203165,
-          "similarity": 0.451
+          "similarity": 0.447
         },
         {
           "anchor_date": "2021-11-10",
           "label": "2021 cycle top (~$69k)",
           "kind": "top",
           "anchor_price": 64702.76011046925,
-          "similarity": 0.9025
+          "similarity": 0.9056
         },
         {
           "anchor_date": "2022-11-22",
           "label": "2022 FTX cycle bottom (~$15.5k)",
           "kind": "bottom",
           "anchor_price": 16183.997839938495,
-          "similarity": 0.5138
+          "similarity": 0.5163
         },
         {
           "anchor_date": "2024-03-14",
           "label": "First post-halving ATH break (~$73k)",
           "kind": "top",
           "anchor_price": 71401.28095361925,
-          "similarity": 0.8792
+          "similarity": 0.873
         },
         {
           "anchor_date": "2025-01-20",
           "label": "Jan 2025 cycle peak (~$108k)",
           "kind": "top",
           "anchor_price": 102061.17846752734,
-          "similarity": 0.8661
+          "similarity": 0.8739
         }
       ]
     },
@@ -2830,17 +2832,17 @@
       {
         "id": "conviction_overhang",
         "fired": false,
-        "ea_overhead_ratio": 1.161,
-        "raw_overhead_ratio": 1.12,
-        "divergence_pct": 3.5,
+        "ea_overhead_ratio": 1.321,
+        "raw_overhead_ratio": 1.117,
+        "divergence_pct": 15.4,
         "composite_required": 60,
         "validated_edge_90d": -73.6,
-        "rationale": "EA ratio 1.16 (need \u22651.2) or composite 38 (need \u226560) below gate"
+        "rationale": "EA ratio 1.32 (need \u22651.2) or composite 38 (need \u226560) below gate"
       },
       {
         "id": "accumulation_cluster_forming",
         "fired": false,
-        "near_price_inflow_pct_supply": 0.446,
+        "near_price_inflow_pct_supply": 1.502,
         "lookback_days": 180,
         "composite_band_required": [
           45,
@@ -2857,7 +2859,7 @@
           "label": "2021 cycle top (~$69k)",
           "kind": "top",
           "anchor_price": 64702.76011046925,
-          "similarity": 0.9025
+          "similarity": 0.9056
         },
         "all_anchors": [
           {
@@ -2865,47 +2867,47 @@
             "label": "2017 cycle top (~$19k)",
             "kind": "top",
             "anchor_price": 19248.898906118284,
-            "similarity": 0.8335
+            "similarity": 0.8283
           },
           {
             "anchor_date": "2018-12-15",
             "label": "2018 cycle bottom (~$3.2k)",
             "kind": "bottom",
             "anchor_price": 3233.38203165,
-            "similarity": 0.451
+            "similarity": 0.447
           },
           {
             "anchor_date": "2021-11-10",
             "label": "2021 cycle top (~$69k)",
             "kind": "top",
             "anchor_price": 64702.76011046925,
-            "similarity": 0.9025
+            "similarity": 0.9056
           },
           {
             "anchor_date": "2022-11-22",
             "label": "2022 FTX cycle bottom (~$15.5k)",
             "kind": "bottom",
             "anchor_price": 16183.997839938495,
-            "similarity": 0.5138
+            "similarity": 0.5163
           },
           {
             "anchor_date": "2024-03-14",
             "label": "First post-halving ATH break (~$73k)",
             "kind": "top",
             "anchor_price": 71401.28095361925,
-            "similarity": 0.8792
+            "similarity": 0.873
           },
           {
             "anchor_date": "2025-01-20",
             "label": "Jan 2025 cycle peak (~$108k)",
             "kind": "top",
             "anchor_price": 102061.17846752734,
-            "similarity": 0.8661
+            "similarity": 0.8739
           }
         ],
         "composite_required": 60,
         "validated_edge_90d": -62.5,
-        "rationale": "Best top-anchor match 2021 cycle top (~$69k) similarity 0.902 (need \u22650.92) or composite 38 (need \u226560) below gate"
+        "rationale": "Best top-anchor match 2021 cycle top (~$69k) similarity 0.906 (need \u22650.92) or composite 38 (need \u226560) below gate"
       },
       {
         "id": "cycle_bottom_pattern_match",
@@ -2915,7 +2917,7 @@
           "label": "2022 FTX cycle bottom (~$15.5k)",
           "kind": "bottom",
           "anchor_price": 16183.997839938495,
-          "similarity": 0.5138
+          "similarity": 0.5163
         },
         "all_anchors": [
           {
@@ -2923,42 +2925,42 @@
             "label": "2017 cycle top (~$19k)",
             "kind": "top",
             "anchor_price": 19248.898906118284,
-            "similarity": 0.8335
+            "similarity": 0.8283
           },
           {
             "anchor_date": "2018-12-15",
             "label": "2018 cycle bottom (~$3.2k)",
             "kind": "bottom",
             "anchor_price": 3233.38203165,
-            "similarity": 0.451
+            "similarity": 0.447
           },
           {
             "anchor_date": "2021-11-10",
             "label": "2021 cycle top (~$69k)",
             "kind": "top",
             "anchor_price": 64702.76011046925,
-            "similarity": 0.9025
+            "similarity": 0.9056
           },
           {
             "anchor_date": "2022-11-22",
             "label": "2022 FTX cycle bottom (~$15.5k)",
             "kind": "bottom",
             "anchor_price": 16183.997839938495,
-            "similarity": 0.5138
+            "similarity": 0.5163
           },
           {
             "anchor_date": "2024-03-14",
             "label": "First post-halving ATH break (~$73k)",
             "kind": "top",
             "anchor_price": 71401.28095361925,
-            "similarity": 0.8792
+            "similarity": 0.873
           },
           {
             "anchor_date": "2025-01-20",
             "label": "Jan 2025 cycle peak (~$108k)",
             "kind": "top",
             "anchor_price": 102061.17846752734,
-            "similarity": 0.8661
+            "similarity": 0.8739
           }
         ],
         "composite_required_max": 30,
@@ -2966,7 +2968,7 @@
         "validated_fired_mean_90d": 33.0,
         "validated_win_rate": 67.0,
         "note": "Confirmation signal \u2014 strong absolute fired_mean but low independent edge; use in confluence.",
-        "rationale": "Best bottom-anchor match 2022 FTX cycle bottom (~$15.5k) similarity 0.514 (need \u22650.85) or composite 38 (need \u226430) above gate"
+        "rationale": "Best bottom-anchor match 2022 FTX cycle bottom (~$15.5k) similarity 0.516 (need \u22650.85) or composite 38 (need \u226430) above gate"
       }
     ],
     "confluence": {
@@ -3000,22 +3002,22 @@
     }
   },
   "synopsis": {
-    "regime_summary": "Composite score 37.2 maintains ACCUMULATE regime with slight uptick from 37.0, indicating stable accumulation conditions with moderate confidence.",
+    "regime_summary": "Composite score 38.3 maintains ACCUMULATE regime with slight uptick from 37.2, reflecting moderate confidence in accumulation conditions.",
     "key_signals": [
-      "Reserve Risk at 0.0012 confirms accumulation zone (threshold \u22640.0025)",
-      "LTH-SOPR at 0.911 shows long-term holders realizing losses",
-      "Mayer Multiple at 0.96 indicates price below 200-day moving average",
-      "RHODL at 1,283 well below accumulation threshold of 4,000",
-      "MVRV at 1.47 shows modest overvaluation but far from cycle top levels"
+      "4 accumulation rules firing: Reserve Risk (0.0012), RHODL Ratio (1,266), Mayer Multiple (0.97), LTH-SOPR (0.88)",
+      "Zero cycle-top confluence with all distribution metrics well below thresholds",
+      "MVRV at 1.48 shows modest overvaluation but far from cycle-top levels (3.7 threshold)",
+      "NUPL at 0.32 indicates hope phase, well below euphoria territory (0.75 threshold)",
+      "STH-MVRV climbing +16.3% over 30 days while LTH still realizing losses"
     ],
-    "thesis": "Bitcoin remains in a clear accumulation phase with 4/10 accumulation rules firing and zero cycle-top indicators activated. The combination of low Reserve Risk, LTH capitulation, and price below long-term moving averages suggests the market is in a healthy consolidation period typical of mid-cycle corrections. NUPL at 0.32 indicates neither euphoria nor despair, supporting a measured accumulation environment.",
+    "thesis": "Bitcoin remains in mid-cycle accumulation phase with multiple technical indicators supporting systematic buying. The combination of LTH capitulation (SOPR 0.88), low Reserve Risk, and price below 200-day MA creates favorable risk-adjusted entry conditions. However, rising STH profitability and NUPL suggests the deepest accumulation phase may be transitioning toward recovery.",
     "risk_factors": [
-      "STH confidence metrics showing neutral momentum could deteriorate into persistent bearishness",
-      "35% drawdown from highs may deepen if macro conditions worsen",
-      "Transfer volume momentum below 1.0 suggests weakening network activity"
+      "STH-MVRV momentum accelerating upward could signal end of accumulation window",
+      "NUPL above 0.3 indicates market no longer in deep fear phases",
+      "Transfer volume momentum neutral at 0.94 lacks strong directional conviction"
     ],
-    "action_bias": "Maintain ACCUMULATE bias as composite score of 37.2 falls within systematic accumulation range (25-45) with multiple confluence signals supporting the regime.",
-    "generated_at": "2026-05-08T04:13:36.560025+00:00",
+    "action_bias": "ACCUMULATE regime justified by composite score 38.3 in 25-45 range, with systematic buying recommended while multiple accumulation confluences remain active.",
+    "generated_at": "2026-05-09T04:13:31.484864+00:00",
     "model": "claude-sonnet-4-20250514"
   }
 }
