@@ -1,6 +1,6 @@
 {
   "schema": "btc_onchain_signal_v1.3",
-  "generated_at": "2026-05-16T04:10:38+00:00",
+  "generated_at": "2026-05-17T04:10:48+00:00",
   "asset": "BTC",
   "composite_score": 50.0,
   "regime": "NEUTRAL",
@@ -350,22 +350,22 @@
     }
   },
   "synopsis": {
-    "regime_summary": "Composite score remains at 50.0/100, maintaining NEUTRAL regime with no change from prior day, though confidence is low due to insufficient data across all metrics.",
+    "regime_summary": "Composite score holds steady at 50.0 (NEUTRAL regime) with no change from prior day, but confidence is extremely low due to insufficient data across all metrics.",
     "key_signals": [
-      "All Tier-S signals showing insufficient data availability",
+      "All Tier-S signals offline due to insufficient data",
       "Zero cycle-top confluence rules firing",
       "Zero accumulation confluence rules firing",
-      "Critical metrics (MVRV, NUPL, Reserve Risk) unavailable for analysis",
-      "Complete absence of on-chain signal generation"
+      "Critical metrics (MVRV, NUPL, Reserve Risk) unavailable",
+      "Complete data blackout across valuation and momentum indicators"
     ],
-    "thesis": "Bitcoin's on-chain position cannot be reliably assessed due to comprehensive data insufficiency across all primary metrics including MVRV, NUPL, and Reserve Risk. The persistent 50.0 neutral score reflects a system default rather than actual market conditions, suggesting either data pipeline issues or market conditions preventing signal generation.",
+    "thesis": "The signal engine is operating in a complete data void, making any cycle position assessment unreliable. Without core metrics like MVRV, NUPL, and Reserve Risk, we cannot determine if BTC is in accumulation, distribution, or transitional phases. The neutral composite score appears to be a default state rather than a meaningful market assessment.",
     "risk_factors": [
-      "Data pipeline disruption masking actual cycle position",
-      "Potential for rapid regime shift once data becomes available",
-      "False neutrality bias during critical market inflection points"
+      "Data feed disruption masking actual market regime",
+      "Potential for sudden regime shift once data resumes",
+      "False neutral reading during extreme market conditions"
     ],
-    "action_bias": "NEUTRAL stance maintained due to composite score of 50.0, though position sizing should be minimal given data uncertainty and inability to assess true market regime.",
-    "generated_at": "2026-05-16T04:11:02.863386+00:00",
+    "action_bias": "NEUTRAL stance warranted due to insufficient data, but prepare for rapid reassessment once signal feeds restore.",
+    "generated_at": "2026-05-17T04:11:15.021647+00:00",
     "model": "claude-sonnet-4-20250514"
   }
 }
