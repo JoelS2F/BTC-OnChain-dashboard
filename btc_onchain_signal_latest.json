@@ -1,6 +1,6 @@
 {
   "schema": "btc_onchain_signal_v1.3",
-  "generated_at": "2026-05-18T04:10:51+00:00",
+  "generated_at": "2026-05-19T04:10:44+00:00",
   "asset": "BTC",
   "composite_score": 50.0,
   "regime": "NEUTRAL",
@@ -348,24 +348,5 @@
       "ath": 0,
       "entity": 0
     }
-  },
-  "synopsis": {
-    "regime_summary": "BTC maintains a 50.0/100 composite score in NEUTRAL regime with no change from prior day, indicating balanced on-chain conditions with moderate confidence.",
-    "key_signals": [
-      "No Tier-S signals firing due to insufficient data availability",
-      "Zero cycle-top confluence rules activated across all valuation metrics",
-      "Zero accumulation confluence rules triggered across all distress indicators",
-      "All critical metrics (MVRV, NUPL, Reserve Risk, aSOPR) showing null values",
-      "STH and LTH behavioral indicators remain dormant"
-    ],
-    "thesis": "Bitcoin's on-chain engine indicates a data-constrained neutral state with no clear directional bias from either distribution or accumulation confluence frameworks. The absence of fired signals across all Tier-S categories and confluence rules suggests BTC is in a transitional phase where key on-chain metrics have yet to establish clear trend momentum. This neutral positioning reflects a market in equilibrium, awaiting catalyst events to drive meaningful on-chain activity patterns.",
-    "risk_factors": [
-      "Data insufficiency could mask underlying on-chain regime shifts",
-      "Sudden activation of multiple confluence rules could rapidly alter regime classification",
-      "Transfer volume and realized P&L patterns may emerge quickly in volatile conditions"
-    ],
-    "action_bias": "NEUTRAL stance recommended given 50.0 composite score within 45-65 range, suggesting balanced allocation until on-chain data provides clearer directional signals.",
-    "generated_at": "2026-05-18T04:11:17.872118+00:00",
-    "model": "claude-sonnet-4-20250514"
   }
 }
