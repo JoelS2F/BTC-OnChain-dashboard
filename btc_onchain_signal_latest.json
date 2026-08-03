@@ -1,6 +1,6 @@
 {
   "schema": "btc_onchain_signal_v1.3",
-  "generated_at": "2026-08-02T04:10:38+00:00",
+  "generated_at": "2026-08-03T04:11:01+00:00",
   "asset": "BTC",
   "composite_score": 50.0,
   "regime": "NEUTRAL",
